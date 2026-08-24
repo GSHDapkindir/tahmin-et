@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galatasaray Skor Tahmin Oyunu</title>
+    <style>
+        :root {
+            --gs-red: #A50014;
+            --gs-yellow: #FDB912;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border: 2px solid var(--gs-yellow);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(253, 185, 18, 0.2);
+            box-sizing: border-box;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: var(--gs-yellow);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--gs-red);
+            padding-bottom: 10px;
+        }
+
+        .match-box {
+            background: linear-gradient(135deg, var(--gs-red), #500008);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--gs-yellow);
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background: #2a2a2a;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .score-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .score-inputs input {
+            text-align: center;
+            font-size: 1.5em;
+            width: 80px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--gs-yellow);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #d49a0f;
+        }
+
+        button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+            color: #888;
+        }
+
+        .alert {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .alert-success { background-color: #1b5e20; color: #a5d6a7; }
+        .alert-danger { background-color: #b71c1c; color: #ffcdd2; }
+        .alert-info { background-color: #01579b; color: #b3e5fc; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            color: var(--gs-yellow);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cimbom Skor Tahmin</h1>
+        
+        <div class="match-box">
+            Galatasaray - Göztepe
+            <div style="font-size: 0.8em; color: #ddd; margin-top: 5px;">Haftanın Maçı</div>
+        </div>
+
+        <div id="game-section">
+            <div class="form-group">
+                <label for="nickname">Rumuz / Nick:</label>
+                <input type="text" id="nickname" placeholder="Örn: Aslan34">
+            </div>
+
+            <div class="form-group">
+                <label>Tahminin:</label>
+                <div class="score-inputs">
+                    <input type="number" id="home-score" min="0" placeholder="GS">
+                    <span>-</span>
+                    <input type="number" id="away-score" min="0" placeholder="GÖZ">
+                </div>
+            </div>
+
+            <button id="submit-btn" onclick="makePrediction()">Tahmini Kaydet</button>
+            <div id="status-message"></div>
+        </div>
+
+        <hr style="border-color: #333; margin: 30px 0;">
+
+        <h2>Haftalık Skor Tablosu</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nick</th>
+                    <th>Tahmin</th>
+                    <th>Zaman / Durum</th>
+                </tr>
+            </thead>
+            <tbody id="scoreboard-list">
+                <!-- Skorlar buraya gelecek -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Maç durumu ve süre ayarları (Simülasyon için localStorage kullanılmıştır)
+        // Gerçek global veritabanı için Supabase/Firebase entegre edilebilir.
+        
+        const MATCH_KEY = "gs_goztepe_tahminler";
+        
+        function loadPredictions() {
+            const data = JSON.parse(localStorage.getItem(MATCH_KEY)) || [];
+            const tbody = document.getElementById("scoreboard-list");
+            tbody.innerHTML = "";
+
+            data.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${item.nick}</td>
+                    <td><b>${item.home} - ${item.away}</b></td>
+                    <td><small>${new Date(item.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</small></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function makePrediction() {
+            const nick = document.getElementById("nickname").value.trim();
+            const home = document.getElementById("home-score").value;
+            const away = document.getElementById("away-score").value;
+            const statusDiv = document.getElementById("status-message");
+
+            if (!nick || home === "" || away === "") {
+                statusDiv.innerHTML = '<div class="alert alert-danger">Lütfen nickini ve skorları eksiksiz gir!</div>';
+                return;
+            }
+
+            let predictions = JSON.parse(localStorage.getItem(MATCH_KEY)) || [];
+            
+            // Kullanıcı daha önce tahmin yapmış mı kontrol et
+            let userIndex = predictions.findIndex(p => p.nick.toLowerCase() === nick.toLowerCase());
+            const now = new Date().getTime();
+
+            if (userIndex !== -1) {
+                // Daha önce tahmin yapılmış, 30 dakika geçmiş mi kontrol et
+                const diffMinutes = (now - predictions[userIndex].time) / (1000 * 60);
+                if (diffMinutes > 30) {
+                    statusDiv.innerHTML = '<div class="alert alert-danger">30 dakikalık güncelleme süresi dolduğu için tahminin değiştirilemez!</div>';
+                    return;
+                }
+                // Güncelle
+                predictions[userIndex].home = home;
+                predictions[userIndex].away = away;
+                statusDiv.innerHTML = '<div class="alert alert-success">Tahminin başarıyla güncellendi! (30 dk kuralı aktif)</div>';
+            } else {
+                // Yeni kayıt
+                predictions.push({
+                    nick: nick,
+                    home: home,
+                    away: away,
+                    time: now
+                });
+                statusDiv.innerHTML = '<div class="alert alert-success">Tahminin kaydedildi! 30 dakika içinde güncelleyebilirsin.</div>';
+            }
+
+            localStorage.setItem(MATCH_KEY, JSON.stringify(predictions));
+            loadPredictions();
+        }
+
+        // Sayfa açıldığında tabloyu yükle
+        window.onload = loadPredictions;
+    </script>
+</body>
+</html>
