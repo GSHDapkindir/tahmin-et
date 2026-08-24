@@ -3,204 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galatasaray Skor Tahmin Oyunu</title>
+    <title>Cimbom Arena - Skor Tahmin Platformu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --gs-red: #A50014;
+            --gs-dark-red: #68000A;
             --gs-yellow: #FDB912;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #ffffff;
+            --gs-gold: #FFD700;
+            --dark-bg: #0b0b0b;
+            --card-bg: rgba(22, 22, 22, 0.85);
+            --border-color: rgba(253, 185, 18, 0.2);
+            --text-color: #f0f0f0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg);
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at center, #1c0809 0%, var(--dark-bg) 100%);
             color: var(--text-color);
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(253, 185, 18, 0.1);
+            box-sizing: border-box;
+        }
+
+        .header-title {
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--gs-yellow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(253, 185, 18, 0.3);
+        }
+
+        .header-subtitle {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+        }
+
+        /* Maç Kartı Tasarımı */
+        .match-card {
+            background: linear-gradient(135deg, var(--gs-red), var(--gs-dark-red));
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(165, 0, 20, 0.4);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 35%;
+        }
+
+        .team img {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+            margin-bottom: 8px;
+        }
+
+        .team span {
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .match-vs {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--gs-yellow);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Form Elemanları */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gs-yellow);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--gs-yellow);
+            outline: none;
+            box-shadow: 0 0 10px rgba(253, 185, 18, 0.2);
+        }
+
+        .score-inputs-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .score-input-box {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background: var(--card-bg);
-            border: 2px solid var(--gs-yellow);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(253, 185, 18, 0.2);
-            box-sizing: border-box;
+        .score-input-box label {
+            font-size: 0.75rem;
+            margin-bottom: 4px;
+            color: #aaa;
         }
 
-        h1, h2 {
+        input[type="number"] {
             text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            width: 75px;
+            height: 65px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: rgba(0, 0, 0, 0.5);
             color: var(--gs-yellow);
-            text-transform: uppercase;
-            border-bottom: 2px solid var(--gs-red);
-            padding-bottom: 10px;
+            box-sizing: border-box;
+            transition: all 0.3s;
         }
 
-        .match-box {
-            background: linear-gradient(135deg, var(--gs-red), #500008);
-            border-radius: 8px;
+        input[type="number"]:focus {
+            border-color: var(--gs-yellow);
+            outline: none;
+            box-shadow: 0 0 15px rgba(253, 185, 18, 0.3);
+        }
+
+        /* Buton */
+        button.btn-primary {
+            width: 100%;
             padding: 15px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--gs-yellow);
-        }
-
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background: #2a2a2a;
-            color: white;
-            box-sizing: border-box;
-        }
-
-        .score-inputs {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .score-inputs input {
-            text-align: center;
-            font-size: 1.5em;
-            width: 80px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--gs-yellow);
-            color: var(--dark-bg);
+            background: linear-gradient(135deg, var(--gs-yellow), #d49a0f);
+            color: #0b0b0b;
             border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1.1em;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1.05rem;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(253, 185, 18, 0.3);
         }
 
-        button:hover {
-            background-color: #d49a0f;
+        button.btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(253, 185, 18, 0.5);
         }
 
         button:disabled {
-            background-color: #555;
+            background: #2a2a2a;
+            color: #666;
             cursor: not-allowed;
-            color: #888;
+            box-shadow: none;
+            transform: none;
         }
 
+        /* Bildirim Kutuları */
         .alert {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
             text-align: center;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.95rem;
+            animation: fadeIn 0.4s ease;
         }
 
-        .alert-success { background-color: #1b5e20; color: #a5d6a7; }
-        .alert-danger { background-color: #b71c1c; color: #ffcdd2; }
-        .alert-info { background-color: #01579b; color: #b3e5fc; }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #333;
-        }
+        .alert-success { background: rgba(27, 94, 32, 0.4); border: 1px solid #2e7d32; color: #a5d6a7; }
+        .alert-danger { background: rgba(183, 28, 28, 0.4); border: 1px solid #c62828; color: #ffcdd2; }
+        .alert-info { background: rgba(1, 87, 155, 0.4); border: 1px solid #0288d1; color: #b3e5fc; }
 
-        th {
+        /* Liderlik Tablosu (Scoreboard) */
+        .section-title {
             color: var(--gs-yellow);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin: 35px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(253, 185, 18, 0.2);
+        }
+
+        .scoreboard-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+
+        .scoreboard-table th {
+            color: #888;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            text-align: left;
+        }
+
+        .scoreboard-row {
+            background: rgba(25, 25, 25, 0.6);
+            transition: all 0.2s;
+        }
+
+        .scoreboard-row:hover {
+            background: rgba(35, 35, 35, 0.9);
+        }
+
+        .scoreboard-table td {
+            padding: 14px 15px;
+            font-size: 0.95rem;
+        }
+
+        .scoreboard-table td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            font-weight: 700;
+            color: var(--gs-yellow);
+        }
+
+        .scoreboard-table td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            text-align: right;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        .badge-pred {
+            background: rgba(253, 185, 18, 0.1);
+            color: var(--gs-yellow);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            border: 1px solid rgba(253, 185, 18, 0.2);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Cimbom Skor Tahmin</h1>
+        <div class="header-title">Cimbom Arena</div>
+        <div class="header-subtitle">Skor Tahmin Platformu</div>
         
-        <div class="match-box">
-            Galatasaray - Göztepe
-            <div style="font-size: 0.8em; color: #ddd; margin-top: 5px;">Haftanın Maçı</div>
+        <!-- Maç Bilgisi & Logolar -->
+        <div class="match-card">
+            <div class="team">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/16862774875556371454_0" alt="Galatasaray">
+                <span>Galatasaray</span>
+            </div>
+            <div class="match-vs">VS</div>
+            <div class="team">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/2360951532873033602_0" alt="Göztepe">
+                <span>Göztepe</span>
+            </div>
         </div>
 
+        <!-- Tahmin Formu -->
         <div id="game-section">
             <div class="form-group">
-                <label for="nickname">Rumuz / Nick:</label>
-                <input type="text" id="nickname" placeholder="Örn: Aslan34">
+                <label for="nickname">Rumuz / Nickname</label>
+                <input type="text" id="nickname" placeholder="Örn: AslanKing">
             </div>
 
             <div class="form-group">
-                <label>Tahminin:</label>
-                <div class="score-inputs">
-                    <input type="number" id="home-score" min="0" placeholder="GS">
-                    <span>-</span>
-                    <input type="number" id="away-score" min="0" placeholder="GÖZ">
+                <label>Skor Tahmini</label>
+                <div class="score-inputs-wrapper">
+                    <div class="score-input-box">
+                        <label>GALATASARAY</label>
+                        <input type="number" id="home-score" min="0" value="0">
+                    </div>
+                    <span style="font-size: 1.5rem; color: #555; font-weight: bold;">-</span>
+                    <div class="score-input-box">
+                        <label>GÖZTEPE</label>
+                        <input type="number" id="away-score" min="0" value="0">
+                    </div>
                 </div>
             </div>
 
-            <button id="submit-btn" onclick="makePrediction()">Tahmini Kaydet</button>
+            <button class="btn-primary" id="submit-btn" onclick="makePrediction()">Tahmini Onayla & Kaydet</button>
             <div id="status-message"></div>
         </div>
 
-        <hr style="border-color: #333; margin: 30px 0;">
-
-        <h2>Haftalık Skor Tablosu</h2>
-        <table>
+        <!-- Skor Tablosu -->
+        <div class="section-title">Haftanın Liderlik Tablosu</div>
+        <table class="scoreboard-table">
             <thead>
                 <tr>
-                    <th>Nick</th>
+                    <th>Rumuz</th>
                     <th>Tahmin</th>
-                    <th>Zaman / Durum</th>
+                    <th style="text-align: right;">Durum / Süre</th>
                 </tr>
             </thead>
             <tbody id="scoreboard-list">
-                <!-- Skorlar buraya gelecek -->
+                <!-- Kayıtlar dinamik yüklenecek -->
             </tbody>
         </table>
     </div>
 
     <script>
-        // Maç durumu ve süre ayarları (Simülasyon için localStorage kullanılmıştır)
-        // Gerçek global veritabanı için Supabase/Firebase entegre edilebilir.
-        
-        const MATCH_KEY = "gs_goztepe_tahminler";
+        const MATCH_KEY = "gs_goztepe_tahminler_v2";
         
         function loadPredictions() {
             const data = JSON.parse(localStorage.getItem(MATCH_KEY)) || [];
             const tbody = document.getElementById("scoreboard-list");
             tbody.innerHTML = "";
 
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #666; padding: 20px;">Henüz tahmin yapılmamış. İlk tahmini sen yap!</td></tr>`;
+                return;
+            }
+
+            // En yeniden eskiye sıralama
+            data.sort((a, b) => b.time - a.time);
+
             data.forEach(item => {
                 const tr = document.createElement("tr");
+                tr.className = "scoreboard-row";
+                
+                const timeStr = new Date(item.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                
                 tr.innerHTML = `
                     <td>${item.nick}</td>
-                    <td><b>${item.home} - ${item.away}</b></td>
-                    <td><small>${new Date(item.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</small></td>
+                    <td><span class="badge-pred">${item.home} - ${item.away}</span></td>
+                    <td>${timeStr}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -212,28 +396,34 @@
             const away = document.getElementById("away-score").value;
             const statusDiv = document.getElementById("status-message");
 
-            if (!nick || home === "" || away === "") {
-                statusDiv.innerHTML = '<div class="alert alert-danger">Lütfen nickini ve skorları eksiksiz gir!</div>';
+            if (!nick) {
+                statusDiv.innerHTML = '<div class="alert alert-danger">⚠️ Lütfen geçerli bir rumuz (nick) yaz!</div>';
+                return;
+            }
+
+            if (home === "" || away === "") {
+                statusDiv.innerHTML = '<div class="alert alert-danger">⚠️ Lütfen her iki takım için de skor gir!</div>';
                 return;
             }
 
             let predictions = JSON.parse(localStorage.getItem(MATCH_KEY)) || [];
-            
-            // Kullanıcı daha önce tahmin yapmış mı kontrol et
             let userIndex = predictions.findIndex(p => p.nick.toLowerCase() === nick.toLowerCase());
             const now = new Date().getTime();
 
             if (userIndex !== -1) {
-                // Daha önce tahmin yapılmış, 30 dakika geçmiş mi kontrol et
+                // 30 Dakika kuralı kontrolü
                 const diffMinutes = (now - predictions[userIndex].time) / (1000 * 60);
                 if (diffMinutes > 30) {
-                    statusDiv.innerHTML = '<div class="alert alert-danger">30 dakikalık güncelleme süresi dolduğu için tahminin değiştirilemez!</div>';
+                    statusDiv.innerHTML = '<div class="alert alert-danger">⛔ 30 dakikalık güncelleme süresi doldu! Maç bitimine kadar tahmin değiştirilemez.</div>';
                     return;
                 }
+                
                 // Güncelle
                 predictions[userIndex].home = home;
                 predictions[userIndex].away = away;
-                statusDiv.innerHTML = '<div class="alert alert-success">Tahminin başarıyla güncellendi! (30 dk kuralı aktif)</div>';
+                
+                // Kazanan / Kaybeden şık uyarı simülasyonu mantığı (Örnek bildirimler)
+                statusDiv.innerHTML = '<div class="alert alert-success">🎉 Harika! Tahminin başarıyla güncellendi. (30 dk kuralı aktif)</div>';
             } else {
                 // Yeni kayıt
                 predictions.push({
@@ -242,14 +432,18 @@
                     away: away,
                     time: now
                 });
-                statusDiv.innerHTML = '<div class="alert alert-success">Tahminin kaydedildi! 30 dakika içinde güncelleyebilirsin.</div>';
+                
+                // İstediğin uyarı mesajları senaryosu (Kayıt anındaki karşılama uyarısı)
+                statusDiv.innerHTML = `
+                    <div class="alert alert-success">🏆 Tahminin sisteme işlendi Aslan! Maç sonu için şansın bol olsun.</div>
+                    <div class="alert alert-info" style="margin-top: 8px;">💡 Bilgi: Kaybedersen üzülmek yok, önümüzdeki maçlarda kral sensin!</div>
+                `;
             }
 
             localStorage.setItem(MATCH_KEY, JSON.stringify(predictions));
             loadPredictions();
         }
 
-        // Sayfa açıldığında tabloyu yükle
         window.onload = loadPredictions;
     </script>
 </body>
