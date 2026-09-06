@@ -1,450 +1,2381 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cimbom Arena - Skor Tahmin Platformu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gs-red: #A50014;
-            --gs-dark-red: #68000A;
-            --gs-yellow: #FDB912;
-            --gs-gold: #FFD700;
-            --dark-bg: #0b0b0b;
-            --card-bg: rgba(22, 22, 22, 0.85);
-            --border-color: rgba(253, 185, 18, 0.2);
-            --text-color: #f0f0f0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(circle at center, #1c0809 0%, var(--dark-bg) 100%);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
+<title>GALATASARAY KADRO KURUCU</title>
 
-        .container {
-            width: 100%;
-            max-width: 650px;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(253, 185, 18, 0.1);
-            box-sizing: border-box;
-        }
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-        .header-title {
-            text-align: center;
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: var(--gs-yellow);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 10px rgba(253, 185, 18, 0.3);
-        }
+<style>
 
-        .header-subtitle {
-            text-align: center;
-            font-size: 0.85rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        /* Maç Kartı Tasarımı */
-        .match-card {
-            background: linear-gradient(135deg, var(--gs-red), var(--gs-dark-red));
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(165, 0, 20, 0.4);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
+:root{
+    --red:#a40000;
+    --red2:#d80000;
+    --yellow:#ffd400;
+    --yellow2:#ffe96a;
+}
 
-        .team {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 35%;
-        }
+body{
+    min-height:100vh;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
 
-        .team img {
-            width: 65px;
-            height: 65px;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-            margin-bottom: 8px;
-        }
+    background:
+        radial-gradient(
+            circle at 10% 5%,
+            rgba(170,0,0,.35),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 95%,
+            rgba(255,212,0,.12),
+            transparent 30%
+        ),
+        #070709;
+}
 
-        .team span {
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
+/* ================= HEADER ================= */
 
-        .match-vs {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--gs-yellow);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
+.header{
+    padding:16px;
 
-        /* Form Elemanları */
-        .form-group {
-            margin-bottom: 20px;
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #08080b,
+            #18181e
+        );
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--gs-yellow);
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
+    border-bottom:
+        1px solid
+        rgba(255,212,0,.2);
 
-        input[type="text"] {
-            width: 100%;
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            box-sizing: border-box;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
+    box-shadow:
+        0 8px 35px rgba(0,0,0,.5);
+}
 
-        input[type="text"]:focus {
-            border-color: var(--gs-yellow);
-            outline: none;
-            box-shadow: 0 0 10px rgba(253, 185, 18, 0.2);
-        }
+.header-inner{
+    max-width:1200px;
+    margin:auto;
 
-        .score-inputs-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            align-items: center;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-        .score-input-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    gap:15px;
+}
 
-        .score-input-box label {
-            font-size: 0.75rem;
-            margin-bottom: 4px;
-            color: #aaa;
-        }
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
-        input[type="number"] {
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            width: 75px;
-            height: 65px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            background: rgba(0, 0, 0, 0.5);
-            color: var(--gs-yellow);
-            box-sizing: border-box;
-            transition: all 0.3s;
-        }
+.logo{
+    width:52px;
+    height:52px;
 
-        input[type="number"]:focus {
-            border-color: var(--gs-yellow);
-            outline: none;
-            box-shadow: 0 0 15px rgba(253, 185, 18, 0.3);
-        }
+    border-radius:50%;
 
-        /* Buton */
-        button.btn-primary {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--gs-yellow), #d49a0f);
-            color: #0b0b0b;
-            border: none;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 1.05rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(253, 185, 18, 0.3);
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #a40000,
+            #e00000
+        );
 
-        button.btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(253, 185, 18, 0.5);
-        }
+    border:
+        3px solid
+        var(--yellow);
 
-        button:disabled {
-            background: #2a2a2a;
-            color: #666;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-        /* Bildirim Kutuları */
-        .alert {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.95rem;
-            animation: fadeIn 0.4s ease;
-        }
+    font-size:18px;
+    font-weight:1000;
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    box-shadow:
+        0 0 20px
+        rgba(255,212,0,.3);
+}
 
-        .alert-success { background: rgba(27, 94, 32, 0.4); border: 1px solid #2e7d32; color: #a5d6a7; }
-        .alert-danger { background: rgba(183, 28, 28, 0.4); border: 1px solid #c62828; color: #ffcdd2; }
-        .alert-info { background: rgba(1, 87, 155, 0.4); border: 1px solid #0288d1; color: #b3e5fc; }
+.brand h1{
+    font-size:19px;
+    font-weight:1000;
+}
 
-        /* Liderlik Tablosu (Scoreboard) */
-        .section-title {
-            color: var(--gs-yellow);
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            margin: 35px 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.brand p{
+    margin-top:4px;
+    color:#8d9098;
+    font-size:11px;
+}
 
-        .section-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: rgba(253, 185, 18, 0.2);
-        }
+.actions{
+    display:flex;
+    gap:8px;
+}
 
-        .scoreboard-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 8px;
-        }
+.btn{
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 
-        .scoreboard-table th {
-            color: #888;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 5px 15px;
-            text-align: left;
-        }
+    border-radius:10px;
 
-        .scoreboard-row {
-            background: rgba(25, 25, 25, 0.6);
-            transition: all 0.2s;
-        }
+    padding:11px 14px;
 
-        .scoreboard-row:hover {
-            background: rgba(35, 35, 35, 0.9);
-        }
+    color:#fff;
 
-        .scoreboard-table td {
-            padding: 14px 15px;
-            font-size: 0.95rem;
-        }
+    font-size:11px;
+    font-weight:900;
 
-        .scoreboard-table td:first-child {
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-            font-weight: 700;
-            color: var(--gs-yellow);
-        }
+    cursor:pointer;
+}
 
-        .scoreboard-table td:last-child {
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-            text-align: right;
-            color: #aaa;
-            font-size: 0.85rem;
-        }
+.save{
+    background:
+        linear-gradient(
+            135deg,
+            #a50000,
+            #dc0000
+        );
+}
 
-        .badge-pred {
-            background: rgba(253, 185, 18, 0.1);
-            color: var(--gs-yellow);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-weight: 700;
-            border: 1px solid rgba(253, 185, 18, 0.2);
-        }
-    </style>
+.reset{
+    background:#24242a;
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+    max-width:1200px;
+    margin:16px auto 10px;
+    padding:0 15px;
+}
+
+.control{
+    background:
+        rgba(18,18,23,.96);
+
+    border:
+        1px solid
+        rgba(255,212,0,.12);
+
+    border-radius:14px;
+
+    padding:11px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
+}
+
+select{
+    background:#24242a;
+    color:#fff;
+
+    border:
+        1px solid
+        rgba(255,212,0,.2);
+
+    border-radius:9px;
+
+    padding:11px 14px;
+
+    font-size:12px;
+    font-weight:900;
+
+    outline:none;
+}
+
+.progress-area{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    color:#9b9da5;
+
+    font-size:11px;
+    font-weight:700;
+}
+
+.progress{
+    width:130px;
+    height:6px;
+
+    background:#292930;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--red),
+            var(--yellow)
+        );
+
+    transition:.3s;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    padding:0 15px 40px;
+}
+
+.pitch-wrap{
+    width:100%;
+    max-width:720px;
+    margin:auto;
+}
+
+/* ================= PITCH ================= */
+
+.pitch{
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:1 / 1.43;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    border:
+        4px solid
+        #ffe46b;
+
+    background:
+
+        repeating-linear-gradient(
+            90deg,
+            rgba(160,0,0,.16) 0px,
+            rgba(160,0,0,.16) 75px,
+            rgba(255,215,0,.08) 75px,
+            rgba(255,215,0,.08) 150px
+        ),
+
+        linear-gradient(
+            145deg,
+            #6f0909,
+            #9e0808 35%,
+            #6b0808 70%,
+            #b10b0b
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.65),
+        inset 0 0 100px rgba(0,0,0,.35),
+        0 0 45px rgba(255,212,0,.12);
+}
+
+.pitch:before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255,230,90,.16),
+            transparent 42%
+        );
+
+    pointer-events:none;
+}
+
+/* ================= PITCH LINES ================= */
+
+.line{
+    position:absolute;
+
+    border:
+        2px solid
+        rgba(255,235,120,.8);
+
+    pointer-events:none;
+}
+
+.half{
+    width:100%;
+    height:0;
+
+    top:50%;
+    left:0;
+}
+
+.circle{
+    width:25%;
+    aspect-ratio:1;
+
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+}
+
+.dot{
+    position:absolute;
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:#ffe96a;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+}
+
+.penalty{
+    position:absolute;
+
+    width:48%;
+    height:18%;
+
+    left:26%;
+
+    border:
+        2px solid
+        rgba(255,235,120,.8);
+}
+
+.penalty.top{
+    top:0;
+    border-top:0;
+}
+
+.penalty.bottom{
+    bottom:0;
+    border-bottom:0;
+}
+
+.goal{
+    position:absolute;
+
+    width:18%;
+    height:6%;
+
+    left:41%;
+
+    border:
+        2px solid
+        rgba(255,235,120,.8);
+}
+
+.goal.top{
+    top:0;
+    border-top:0;
+}
+
+.goal.bottom{
+    bottom:0;
+    border-bottom:0;
+}
+
+/* ================= POSITIONS ================= */
+
+.position{
+    position:absolute;
+
+    transform:
+        translate(-50%,-50%);
+
+    left:var(--x);
+    top:var(--y);
+
+    width:100px;
+    height:55px;
+
+    z-index:20;
+}
+
+.position button{
+    width:100%;
+    height:100%;
+
+    border:0;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+}
+
+/* ================= PLUS ================= */
+
+.position.empty button{
+
+    width:58px;
+    height:58px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:
+        3px solid
+        var(--yellow);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,212,0,.3),
+            rgba(160,0,0,.85)
+        );
+
+    box-shadow:
+        0 0 0 5px
+        rgba(255,212,0,.12),
+
+        0 0 25px
+        rgba(255,212,0,.55),
+
+        0 8px 20px
+        rgba(0,0,0,.6);
+
+    animation:pulse 1.8s infinite;
+}
+
+.plus{
+    font-size:34px;
+    font-weight:300;
+    color:#fff;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        box-shadow:
+            0 0 0 5px
+            rgba(255,212,0,.1),
+            0 0 20px
+            rgba(255,212,0,.4);
+    }
+
+    50%{
+        box-shadow:
+            0 0 0 9px
+            rgba(255,212,0,.05),
+            0 0 35px
+            rgba(255,212,0,.8);
+    }
+}
+
+/* =================================================
+   SEÇİLMİŞ FUTBOLCU
+   SADECE İSİM
+================================================= */
+
+.player{
+    position:relative;
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+/* AVATAR TAMAMEN YOK */
+
+.player-name{
+
+    position:relative;
+
+    display:block;
+
+    white-space:nowrap;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8e0000,
+            #c80000
+        );
+
+    border:
+        2px solid
+        var(--yellow);
+
+    border-radius:9px;
+
+    padding:
+        8px 11px;
+
+    font-size:10px;
+
+    line-height:1.1;
+
+    font-weight:1000;
+
+    text-align:center;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.65),
+
+        0 0 15px
+        rgba(255,212,0,.2);
+
+    z-index:30;
+}
+
+/* ================= MAÇIN OYUNCUSU ================= */
+
+.motm-section{
+    max-width:720px;
+
+    margin:16px auto 0;
+
+    display:none;
+}
+
+.motm-section.show{
+    display:block;
+}
+
+.motm-card{
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30,8,8,.98),
+            rgba(18,18,22,.98)
+        );
+
+    border:
+        1px solid
+        rgba(255,212,0,.28);
+
+    border-radius:15px;
+
+    padding:15px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.35);
+}
+
+.motm-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:14px;
+    font-weight:1000;
+}
+
+.motm-title span{
+    color:var(--yellow);
+}
+
+.motm-sub{
+
+    margin-top:4px;
+
+    color:#888c95;
+
+    font-size:10px;
+}
+
+.motm-select{
+
+    width:100%;
+
+    margin-top:11px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    background:#25252c;
+
+    border:
+        1px solid
+        rgba(255,212,0,.2);
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    outline:none;
+}
+
+/* MAÇIN OYUNCUSU YILDIZI */
+
+.motm-star{
+
+    position:absolute;
+
+    top:-15px;
+    right:-8px;
+
+    z-index:100;
+
+    font-size:20px;
+
+    filter:
+        drop-shadow(
+            0 2px 5px #000
+        );
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:15px;
+
+    background:
+        rgba(0,0,0,.8);
+
+    backdrop-filter:blur(10px);
+
+    z-index:1000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-card{
+
+    width:min(680px,100%);
+
+    max-height:90vh;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #131318,
+            #09090c
+        );
+
+    border:
+        1px solid
+        rgba(255,212,0,.25);
+
+    border-radius:20px;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.8);
+}
+
+.modal-header{
+
+    padding:17px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.07);
+}
+
+.modal-title{
+
+    font-size:17px;
+    font-weight:1000;
+}
+
+.modal-sub{
+
+    margin-top:4px;
+
+    color:#858891;
+
+    font-size:10px;
+}
+
+.close{
+
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    border:0;
+
+    background:#27272d;
+
+    color:#fff;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+.modal-content{
+
+    padding:15px;
+
+    overflow-y:auto;
+
+    max-height:
+        calc(90vh - 75px);
+}
+
+.search{
+
+    width:100%;
+
+    padding:13px;
+
+    border-radius:10px;
+
+    border:
+        1px solid
+        rgba(255,212,0,.15);
+
+    background:#202027;
+
+    color:#fff;
+
+    outline:none;
+
+    font-size:13px;
+
+    margin-bottom:12px;
+}
+
+.filters{
+
+    display:flex;
+
+    gap:7px;
+
+    overflow-x:auto;
+
+    margin-bottom:12px;
+}
+
+.filter{
+
+    flex:none;
+
+    padding:9px 12px;
+
+    border-radius:8px;
+
+    border:0;
+
+    background:#24242b;
+
+    color:#9da0a8;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.filter.active{
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a40000,
+            #d80000
+        );
+}
+
+.player-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:8px;
+}
+
+.player-option{
+
+    min-height:65px;
+
+    padding:9px;
+
+    border-radius:11px;
+
+    background:#1b1b21;
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    color:#fff;
+}
+
+.player-option:hover{
+
+    background:#28282f;
+
+    border-color:
+        rgba(255,212,0,.4);
+}
+
+.player-option.used{
+
+    opacity:.25;
+
+    cursor:not-allowed;
+}
+
+.option-avatar{
+
+    width:42px;
+    height:42px;
+
+    flex:none;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a40000,
+            #df0000,
+            #e9c000
+        );
+
+    border:
+        2px solid
+        #ffe05a;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:10px;
+    font-weight:1000;
+}
+
+.option-name{
+
+    font-size:12px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.option-pos{
+
+    color:#888c95;
+
+    font-size:9px;
+
+    margin-top:3px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+
+    position:fixed;
+
+    left:50%;
+    bottom:25px;
+
+    transform:
+        translate(-50%,30px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:2000;
+
+    padding:
+        12px 17px;
+
+    border-radius:10px;
+
+    background:#18181e;
+
+    border:
+        1px solid
+        rgba(255,212,0,.25);
+
+    font-size:11px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 10px 40px
+        rgba(0,0,0,.6);
+
+    transition:.25s;
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+    .header{
+        padding:12px;
+    }
+
+    .header-inner{
+        align-items:flex-start;
+    }
+
+    .logo{
+        width:43px;
+        height:43px;
+        font-size:15px;
+    }
+
+    .brand h1{
+        font-size:14px;
+    }
+
+    .brand p{
+        font-size:9px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .btn{
+        padding:9px 8px;
+        font-size:9px;
+    }
+
+    .controls{
+        margin-top:9px;
+        padding:0 9px;
+    }
+
+    .control{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    select{
+        width:100%;
+    }
+
+    .progress-area{
+        width:100%;
+    }
+
+    .progress{
+        flex:1;
+    }
+
+    .main{
+        padding:0 8px 25px;
+    }
+
+    .pitch{
+        border-width:3px;
+        border-radius:15px;
+    }
+
+    .position{
+        width:90px;
+        height:50px;
+    }
+
+    .position.empty button{
+        width:48px;
+        height:48px;
+    }
+
+    .plus{
+        font-size:28px;
+    }
+
+    .player-name{
+        font-size:8px;
+        padding:6px 7px;
+        border-width:1.5px;
+        max-width:105px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+    .modal{
+        padding:0;
+        align-items:flex-end;
+    }
+
+    .modal-card{
+        width:100%;
+        max-height:92vh;
+
+        border-radius:
+            20px 20px 0 0;
+    }
+
+    .player-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* ================= EXPORT ================= */
+
+@media(min-width:601px){
+
+    .player-name{
+        font-size:10px;
+    }
+
+}
+
+</style>
 </head>
+
+
 <body>
 
-    <div class="container">
-        <div class="header-title">Cimbom Arena</div>
-        <div class="header-subtitle">Skor Tahmin Platformu</div>
-        
-        <!-- Maç Bilgisi & Logolar -->
-        <div class="match-card">
-            <div class="team">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Galatasaray_Star_Logo.png/960px-Galatasaray_Star_Logo.png" alt="Galatasaray">
-                <span>Galatasaray</span>
-            </div>
-            <div class="match-vs">VS</div>
-            <div class="team">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc7paTUIdREJtRqNfCxMOzWQafRvo8ZKaYFaPTvEpWCQ&s=10" alt="Göztepe">
-                <span>Göztepe</span>
-            </div>
-        </div>
+<header class="header">
 
-        <!-- Tahmin Formu -->
-        <div id="game-section">
-            <div class="form-group">
-                <label for="nickname">Telegram nickiniz/adınız </label>
-                <input type="text" id="nickname" placeholder="Örn: AslanKing">
-            </div>
+<div class="header-inner">
 
-            <div class="form-group">
-                <label>Skor Tahmini</label>
-                <div class="score-inputs-wrapper">
-                    <div class="score-input-box">
-                        <label>GALATASARAY</label>
-                        <input type="number" id="home-score" min="0" value="0">
-                    </div>
-                    <span style="font-size: 1.5rem; color: #555; font-weight: bold;">-</span>
-                    <div class="score-input-box">
-                        <label>GÖZTEPE</label>
-                        <input type="number" id="away-score" min="0" value="0">
-                    </div>
+<div class="brand">
+
+<div class="logo">
+GS
+</div>
+
+<div>
+
+<h1>
+GALATASARAY KADRO KURUCU
+</h1>
+
+<p>
+2026 / 2027 • Kendi 11'ini oluştur
+</p>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button
+class="btn save"
+onclick="saveImage()"
+>
+📸 GÖRSELİ KAYDET
+</button>
+
+<button
+class="btn reset"
+onclick="resetSquad()"
+>
+↻ SIFIRLA
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<section class="controls">
+
+<div class="control">
+
+<select
+id="formation"
+onchange="changeFormation()"
+>
+
+<option>4-4-2</option>
+<option>4-3-3</option>
+<option selected>4-2-3-1</option>
+<option>4-3-1-2</option>
+<option>4-1-4-1</option>
+<option>4-2-2-2</option>
+<option>4-5-1</option>
+<option>5-3-2</option>
+<option>5-4-1</option>
+<option>3-5-2</option>
+<option>3-4-3</option>
+<option>3-4-2-1</option>
+<option>3-4-1-2</option>
+<option>3-3-3-1</option>
+
+</select>
+
+<div class="progress-area">
+
+<span id="counter">
+0 / 11 oyuncu
+</span>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="progressBar"
+></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<main class="main">
+
+<div class="pitch-wrap">
+
+<div
+class="pitch"
+id="pitch"
+>
+
+<div class="line half"></div>
+
+<div class="line circle"></div>
+
+<div class="dot"></div>
+
+<div class="penalty top"></div>
+
+<div class="penalty bottom"></div>
+
+<div class="goal top"></div>
+
+<div class="goal bottom"></div>
+
+<div id="positions"></div>
+
+</div>
+
+
+<div
+class="motm-section"
+id="motmSection"
+>
+
+<div class="motm-card">
+
+<div class="motm-title">
+
+<span>⭐</span>
+
+MAÇIN OYUNCUSU KİM OLUR?
+
+</div>
+
+<div class="motm-sub">
+
+Tahminine göre maçın yıldızı olacak futbolcuyu seç.
+
+</div>
+
+<select
+id="motmSelect"
+class="motm-select"
+onchange="selectMOTM()"
+>
+
+<option value="">
+⭐ Maçın oyuncusunu seç
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- OYUNCU SEÇİM MODALI -->
+
+<div
+class="modal"
+id="playerModal"
+>
+
+<div class="modal-card">
+
+<div class="modal-header">
+
+<div>
+
+<div
+class="modal-title"
+id="modalTitle"
+>
+Oyuncu Seç
+</div>
+
+<div class="modal-sub">
+Galatasaray kadrosundan oyuncu seç
+</div>
+
+</div>
+
+<button
+class="close"
+onclick="closeModal()"
+>
+×
+</button>
+
+</div>
+
+
+<div class="modal-content">
+
+<input
+class="search"
+id="search"
+placeholder="🔎 Futbolcu ara..."
+oninput="renderPlayers()"
+/>
+
+
+<div class="filters">
+
+<button
+class="filter active"
+data-filter="Tümü"
+onclick="setFilter('Tümü',this)"
+>
+Tümü
+</button>
+
+<button
+class="filter"
+data-filter="Kaleci"
+onclick="setFilter('Kaleci',this)"
+>
+Kaleci
+</button>
+
+<button
+class="filter"
+data-filter="Defans"
+onclick="setFilter('Defans',this)"
+>
+Defans
+</button>
+
+<button
+class="filter"
+data-filter="Orta Saha"
+onclick="setFilter('Orta Saha',this)"
+>
+Orta Saha
+</button>
+
+<button
+class="filter"
+data-filter="Forvet"
+onclick="setFilter('Forvet',this)"
+>
+Forvet
+</button>
+
+</div>
+
+<div
+class="player-grid"
+id="playerGrid"
+></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="toast"
+id="toast"
+></div>
+
+
+<script>
+
+/* =====================================================
+   OYUNCULAR
+===================================================== */
+
+const players=[
+
+{name:"Uğurcan Çakır",cat:"Kaleci",pos:"Kaleci"},
+{name:"Günay Güvenç",cat:"Kaleci",pos:"Kaleci"},
+{name:"Jankat Yılmaz",cat:"Kaleci",pos:"Kaleci"},
+{name:"Arda Yılmaz",cat:"Kaleci",pos:"Kaleci"},
+{name:"Enes Emre Büyük",cat:"Kaleci",pos:"Kaleci"},
+
+{name:"Ismail Jakobs",cat:"Defans",pos:"Sol Bek"},
+{name:"Davinson Sánchez",cat:"Defans",pos:"Stoper"},
+{name:"Eren Elmalı",cat:"Defans",pos:"Sol Bek"},
+{name:"Kaan Ayhan",cat:"Defans",pos:"Stoper / Sağ Bek"},
+{name:"Victor Nelsson",cat:"Defans",pos:"Stoper"},
+{name:"Abdülkerim Bardakcı",cat:"Defans",pos:"Stoper"},
+{name:"Kazımcan Karataş",cat:"Defans",pos:"Sol Bek"},
+{name:"Wilfried Singo",cat:"Defans",pos:"Sağ Bek"},
+{name:"Arda Ünyay",cat:"Defans",pos:"Stoper"},
+{name:"El Chadaille Bitshiabu",cat:"Defans",pos:"Stoper"},
+
+{name:"Eyüp Aydın",cat:"Orta Saha",pos:"Ön Libero"},
+{name:"Gabriel Sara",cat:"Orta Saha",pos:"Merkez Orta Saha"},
+{name:"Lucas Torreira",cat:"Orta Saha",pos:"Ön Libero"},
+{name:"Mario Lemina",cat:"Orta Saha",pos:"Merkez Orta Saha"},
+{name:"Lesley Ugochukwu",cat:"Orta Saha",pos:"Ön Libero"},
+{name:"İlkay Gündoğan",cat:"Orta Saha",pos:"Merkez Orta Saha"},
+{name:"Berat Luş",cat:"Orta Saha",pos:"Merkez Orta Saha"},
+{name:"Renato Nhaga",cat:"Orta Saha",pos:"Merkez Orta Saha"},
+{name:"Aleksey Batrakov",cat:"Orta Saha",pos:"10 Numara"},
+
+{name:"Roland Sallai",cat:"Forvet",pos:"Sağ Kanat"},
+{name:"Leroy Sané",cat:"Forvet",pos:"Sağ Kanat"},
+{name:"Yunus Akgün",cat:"Forvet",pos:"Sol Kanat"},
+{name:"Deniz Gül",cat:"Forvet",pos:"Santrafor"},
+{name:"Rafael Leão",cat:"Forvet",pos:"Sol Kanat"},
+{name:"Can Armando Güner",cat:"Forvet",pos:"Santrafor"},
+{name:"Victor Osimhen",cat:"Forvet",pos:"Santrafor"},
+{name:"Barış Alper Yılmaz",cat:"Forvet",pos:"Kanat / Santrafor"},
+{name:"Ada Yüzgeç",cat:"Forvet",pos:"Forvet"}
+
+];
+
+
+/* =====================================================
+   FORMASYONLAR
+===================================================== */
+
+const formations={
+
+"4-4-2":[
+["KALECİ",50,91],
+["SOL BEK",12,70],
+["STOPER",37,75],
+["STOPER",63,75],
+["SAĞ BEK",88,70],
+["SOL ORTA SAHA",12,51],
+["MERKEZ ORTA SAHA",38,56],
+["MERKEZ ORTA SAHA",62,56],
+["SAĞ ORTA SAHA",88,51],
+["SANTRAFOR",36,26],
+["SANTRAFOR",64,26]
+],
+
+"4-3-3":[
+["KALECİ",50,91],
+["SOL BEK",12,70],
+["STOPER",37,75],
+["STOPER",63,75],
+["SAĞ BEK",88,70],
+["MERKEZ ORTA SAHA",28,56],
+["ÖN LİBERO",50,62],
+["MERKEZ ORTA SAHA",72,56],
+["SOL KANAT",20,30],
+["SANTRAFOR",50,21],
+["SAĞ KANAT",80,30]
+],
+
+"4-2-3-1":[
+["KALECİ",50,91],
+["SOL BEK",12,70],
+["STOPER",37,75],
+["STOPER",63,75],
+["SAĞ BEK",88,70],
+["ÖN LİBERO",38,60],
+["ÖN LİBERO",62,60],
+["SOL KANAT",17,40],
+["10 NUMARA",50,42],
+["SAĞ KANAT",83,40],
+["SANTRAFOR",50,21]
+],
+
+"4-3-1-2":[
+["KALECİ",50,91],
+["SOL BEK",12,70],
+["STOPER",37,75],
+["STOPER",63,75],
+["SAĞ BEK",88,70],
+["MERKEZ ORTA SAHA",28,57],
+["ÖN LİBERO",50,62],
+["MERKEZ ORTA SAHA",72,57],
+["10 NUMARA",50,40],
+["SANTRAFOR",37,22],
+["SANTRAFOR",63,22]
+],
+
+"4-1-4-1":[
+["KALECİ",50,91],
+["SOL BEK",12,70],
+["STOPER",37,75],
+["STOPER",63,75],
+["SAĞ BEK",88,70],
+["ÖN LİBERO",50,63],
+["SOL ORTA SAHA",13,49],
+["MERKEZ ORTA SAHA",37,55],
+["MERKEZ ORTA SAHA",63,55],
+["SAĞ ORTA SAHA",87,49],
+["SANTRAFOR",50,22]
+],
+
+"4-2-2-2":[
+["KALECİ",50,91],
+["SOL BEK",12,70],
+["STOPER",37,75],
+["STOPER",63,75],
+["SAĞ BEK",88,70],
+["ÖN LİBERO",39,61],
+["ÖN LİBERO",61,61],
+["SOL HÜCUM ORTA SAHA",32,43],
+["SAĞ HÜCUM ORTA SAHA",68,43],
+["SANTRAFOR",38,25],
+["SANTRAFOR",62,25]
+],
+
+"4-5-1":[
+["KALECİ",50,91],
+["SOL BEK",12,70],
+["STOPER",37,75],
+["STOPER",63,75],
+["SAĞ BEK",88,70],
+["SOL ORTA SAHA",10,49],
+["MERKEZ ORTA SAHA",31,57],
+["ÖN LİBERO",50,62],
+["MERKEZ ORTA SAHA",69,57],
+["SAĞ ORTA SAHA",90,49],
+["SANTRAFOR",50,22]
+],
+
+"5-3-2":[
+["KALECİ",50,91],
+["SOL KANAT BEKİ",8,67],
+["STOPER",29,75],
+["STOPER",50,78],
+["STOPER",71,75],
+["SAĞ KANAT BEKİ",92,67],
+["MERKEZ ORTA SAHA",29,52],
+["ÖN LİBERO",50,59],
+["MERKEZ ORTA SAHA",71,52],
+["SANTRAFOR",37,25],
+["SANTRAFOR",63,25]
+],
+
+"5-4-1":[
+["KALECİ",50,91],
+["SOL KANAT BEKİ",8,67],
+["STOPER",29,75],
+["STOPER",50,78],
+["STOPER",71,75],
+["SAĞ KANAT BEKİ",92,67],
+["SOL ORTA SAHA",12,48],
+["MERKEZ ORTA SAHA",38,56],
+["MERKEZ ORTA SAHA",62,56],
+["SAĞ ORTA SAHA",88,48],
+["SANTRAFOR",50,22]
+],
+
+"3-5-2":[
+["KALECİ",50,91],
+["STOPER",25,75],
+["STOPER",50,78],
+["STOPER",75,75],
+["SOL ORTA SAHA",10,50],
+["MERKEZ ORTA SAHA",31,56],
+["ÖN LİBERO",50,61],
+["MERKEZ ORTA SAHA",69,56],
+["SAĞ ORTA SAHA",90,50],
+["SANTRAFOR",37,24],
+["SANTRAFOR",63,24]
+],
+
+"3-4-3":[
+["KALECİ",50,91],
+["STOPER",25,75],
+["STOPER",50,78],
+["STOPER",75,75],
+["SOL ORTA SAHA",12,52],
+["MERKEZ ORTA SAHA",38,59],
+["MERKEZ ORTA SAHA",62,59],
+["SAĞ ORTA SAHA",88,52],
+["SOL KANAT",22,29],
+["SANTRAFOR",50,21],
+["SAĞ KANAT",78,29]
+],
+
+"3-4-2-1":[
+["KALECİ",50,91],
+["STOPER",25,75],
+["STOPER",50,78],
+["STOPER",75,75],
+["SOL ORTA SAHA",12,52],
+["MERKEZ ORTA SAHA",38,59],
+["MERKEZ ORTA SAHA",62,59],
+["SAĞ ORTA SAHA",88,52],
+["SOL HÜCUM ORTA SAHA",37,37],
+["SAĞ HÜCUM ORTA SAHA",63,37],
+["SANTRAFOR",50,20]
+],
+
+"3-4-1-2":[
+["KALECİ",50,91],
+["STOPER",25,75],
+["STOPER",50,78],
+["STOPER",75,75],
+["SOL ORTA SAHA",12,52],
+["MERKEZ ORTA SAHA",38,59],
+["MERKEZ ORTA SAHA",62,59],
+["SAĞ ORTA SAHA",88,52],
+["10 NUMARA",50,39],
+["SANTRAFOR",37,23],
+["SANTRAFOR",63,23]
+],
+
+"3-3-3-1":[
+["KALECİ",50,91],
+["STOPER",28,75],
+["STOPER",50,78],
+["STOPER",72,75],
+["SOL ORTA SAHA",20,57],
+["ÖN LİBERO",50,62],
+["SAĞ ORTA SAHA",80,57],
+["SOL KANAT",22,38],
+["10 NUMARA",50,42],
+["SAĞ KANAT",78,38],
+["SANTRAFOR",50,20]
+]
+
+};
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let selected={};
+
+let currentSlot=null;
+
+let currentFilter="Tümü";
+
+let motm="";
+
+
+/* =====================================================
+   FORMASYONU OLUŞTUR
+===================================================== */
+
+function renderFormation(){
+
+    const formation=
+        document.getElementById(
+            "formation"
+        ).value;
+
+    const container=
+        document.getElementById(
+            "positions"
+        );
+
+    container.innerHTML="";
+
+    formations[formation].forEach(
+        (p,index)=>{
+
+            const slot=
+                document.createElement(
+                    "div"
+                );
+
+            slot.className=
+                "position empty";
+
+            slot.id=
+                "slot-"+index;
+
+            slot.style.setProperty(
+                "--x",
+                p[1]+"%"
+            );
+
+            slot.style.setProperty(
+                "--y",
+                p[2]+"%"
+            );
+
+            slot.innerHTML=`
+
+                <button
+                    onclick="openPlayerModal(${index})"
+                >
+
+                    <span class="plus">
+                        +
+                    </span>
+
+                </button>
+
+            `;
+
+            container.appendChild(slot);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FORMASYON DEĞİŞTİR
+===================================================== */
+
+function changeFormation(){
+
+    selected={};
+
+    motm="";
+
+    renderFormation();
+
+    updateCounter();
+
+    updateMOTM();
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openPlayerModal(index){
+
+    currentSlot=index;
+
+    const formation=
+        document.getElementById(
+            "formation"
+        ).value;
+
+    document.getElementById(
+        "modalTitle"
+    ).innerText=
+        formations[formation][index][0];
+
+    document.getElementById(
+        "search"
+    ).value="";
+
+    currentFilter="Tümü";
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(
+            x=>x.classList.remove("active")
+        );
+
+    document
+        .querySelector(
+            '[data-filter="Tümü"]'
+        )
+        .classList.add("active");
+
+    renderPlayers();
+
+    document
+        .getElementById("playerModal")
+        .classList.add("show");
+
+}
+
+function closeModal(){
+
+    document
+        .getElementById("playerModal")
+        .classList.remove("show");
+
+}
+
+document
+    .getElementById("playerModal")
+    .addEventListener(
+        "click",
+        e=>{
+
+            if(
+                e.target.id===
+                "playerModal"
+            ){
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   FİLTRE
+===================================================== */
+
+function setFilter(filter,button){
+
+    currentFilter=filter;
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(
+            x=>x.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+    renderPlayers();
+
+}
+
+
+/* =====================================================
+   OYUNCULARI GÖSTER
+===================================================== */
+
+function renderPlayers(){
+
+    const grid=
+        document.getElementById(
+            "playerGrid"
+        );
+
+    const search=
+        document.getElementById(
+            "search"
+        )
+        .value
+        .toLocaleLowerCase("tr-TR");
+
+    grid.innerHTML="";
+
+    players.forEach(
+        (player,index)=>{
+
+            if(
+                currentFilter!=="Tümü" &&
+                player.cat!==currentFilter
+            ){
+                return;
+            }
+
+            if(
+                !player.name
+                    .toLocaleLowerCase("tr-TR")
+                    .includes(search)
+            ){
+                return;
+            }
+
+            const used=
+                Object.values(selected)
+                    .includes(index)
+                &&
+                selected[currentSlot]!==index;
+
+            const option=
+                document.createElement(
+                    "button"
+                );
+
+            option.className=
+                "player-option"+
+                (
+                    used
+                    ? " used"
+                    : ""
+                );
+
+            option.disabled=used;
+
+            option.innerHTML=`
+
+                <div class="option-avatar">
+                    ${getInitials(player.name)}
                 </div>
+
+                <div>
+
+                    <div class="option-name">
+                        ${player.name}
+                    </div>
+
+                    <div class="option-pos">
+                        ${player.pos}
+                    </div>
+
+                </div>
+
+            `;
+
+            if(!used){
+
+                option.onclick=()=>{
+                    selectPlayer(index);
+                };
+
+            }
+
+            grid.appendChild(option);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FUTBOLCU SEÇ
+===================================================== */
+
+function selectPlayer(playerIndex){
+
+    selected[currentSlot]=playerIndex;
+
+    const player=
+        players[playerIndex];
+
+    const slot=
+        document.getElementById(
+            "slot-"+currentSlot
+        );
+
+    slot.classList.remove("empty");
+
+    /*
+       ÖNEMLİ:
+       Burada avatar YOK.
+       Sadece player.name yazdırılıyor.
+    */
+
+    slot.innerHTML=`
+
+        <button
+            onclick="openPlayerModal(${currentSlot})"
+            aria-label="${player.name}"
+        >
+
+            <div class="player">
+
+                <div class="player-name">
+                    ${player.name}
+                </div>
+
             </div>
 
-            <button class="btn-primary" id="submit-btn" onclick="makePrediction()">Tahmini Onayla & Kaydet</button>
-            <div id="status-message"></div>
-        </div>
+        </button>
 
-        <!-- Skor Tablosu -->
-        <div class="section-title">Haftanın Liderlik Tablosu</div>
-        <table class="scoreboard-table">
-            <thead>
-                <tr>
-                    <th>Rumuz</th>
-                    <th>Tahmin</th>
-                    <th style="text-align: right;">Durum / Süre</th>
-                </tr>
-            </thead>
-            <tbody id="scoreboard-list">
-                <!-- Kayıtlar dinamik yüklenecek -->
-            </tbody>
-        </table>
-    </div>
+    `;
 
-    <script>
-        const MATCH_KEY = "gs_goztepe_tahminler_v2";
-        
-        function loadPredictions() {
-            const data = JSON.parse(localStorage.getItem(MATCH_KEY)) || [];
-            const tbody = document.getElementById("scoreboard-list");
-            tbody.innerHTML = "";
+    updateCounter();
 
-            if (data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #666; padding: 20px;">Henüz tahmin yapılmamış. İlk tahmini sen yap!</td></tr>`;
-                return;
+    updateMOTM();
+
+    highlightMOTM();
+
+    closeModal();
+
+}
+
+
+/* =====================================================
+   MAÇIN OYUNCUSU
+===================================================== */
+
+function updateMOTM(){
+
+    const section=
+        document.getElementById(
+            "motmSection"
+        );
+
+    const select=
+        document.getElementById(
+            "motmSelect"
+        );
+
+    const selectedPlayers=
+        Object.values(selected);
+
+    if(
+        selectedPlayers.length!==11
+    ){
+
+        section.classList.remove(
+            "show"
+        );
+
+        motm="";
+
+        select.value="";
+
+        highlightMOTM();
+
+        return;
+    }
+
+    section.classList.add(
+        "show"
+    );
+
+    select.innerHTML=`
+
+        <option value="">
+            ⭐ Maçın oyuncusunu seç
+        </option>
+
+    `;
+
+    selectedPlayers.forEach(
+        index=>{
+
+            const option=
+                document.createElement(
+                    "option"
+                );
+
+            option.value=index;
+
+            option.textContent=
+                players[index].name;
+
+            if(
+                String(index)===
+                String(motm)
+            ){
+                option.selected=true;
             }
 
-            // En yeniden eskiye sıralama
-            data.sort((a, b) => b.time - a.time);
+            select.appendChild(option);
 
-            data.forEach(item => {
-                const tr = document.createElement("tr");
-                tr.className = "scoreboard-row";
-                
-                const timeStr = new Date(item.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                
-                tr.innerHTML = `
-                    <td>${item.nick}</td>
-                    <td><span class="badge-pred">${item.home} - ${item.away}</span></td>
-                    <td>${timeStr}</td>
-                `;
-                tbody.appendChild(tr);
-            });
         }
+    );
 
-        function makePrediction() {
-            const nick = document.getElementById("nickname").value.trim();
-            const home = document.getElementById("home-score").value;
-            const away = document.getElementById("away-score").value;
-            const statusDiv = document.getElementById("status-message");
+}
 
-            if (!nick) {
-                statusDiv.innerHTML = '<div class="alert alert-danger">⚠️ Lütfen geçerli bir rumuz (nick) yaz!</div>';
-                return;
+
+/* =====================================================
+   MAÇIN OYUNCUSUNU SEÇ
+===================================================== */
+
+function selectMOTM(){
+
+    motm=
+        document.getElementById(
+            "motmSelect"
+        ).value;
+
+    highlightMOTM();
+
+}
+
+
+/* =====================================================
+   YILDIZ
+===================================================== */
+
+function highlightMOTM(){
+
+    document
+        .querySelectorAll(
+            ".motm-star"
+        )
+        .forEach(
+            star=>star.remove()
+        );
+
+    if(
+        motm===""
+    ){
+        return;
+    }
+
+    Object.keys(selected).forEach(
+        slotIndex=>{
+
+            if(
+                String(
+                    selected[slotIndex]
+                )===
+                String(motm)
+            ){
+
+                const slot=
+                    document.getElementById(
+                        "slot-"+slotIndex
+                    );
+
+                const star=
+                    document.createElement(
+                        "div"
+                    );
+
+                star.className=
+                    "motm-star";
+
+                star.innerText="⭐";
+
+                slot.appendChild(star);
+
             }
 
-            if (home === "" || away === "") {
-                statusDiv.innerHTML = '<div class="alert alert-danger">⚠️ Lütfen her iki takım için de skor gir!</div>';
-                return;
-            }
+        }
+    );
 
-            let predictions = JSON.parse(localStorage.getItem(MATCH_KEY)) || [];
-            let userIndex = predictions.findIndex(p => p.nick.toLowerCase() === nick.toLowerCase());
-            const now = new Date().getTime();
+}
 
-            if (userIndex !== -1) {
-                // 30 Dakika kuralı kontrolü
-                const diffMinutes = (now - predictions[userIndex].time) / (1000 * 60);
-                if (diffMinutes > 30) {
-                    statusDiv.innerHTML = '<div class="alert alert-danger">⛔ 30 dakikalık güncelleme süresi doldu! Maç bitimine kadar tahmin değiştirilemez.</div>';
-                    return;
+
+/* =====================================================
+   İSİM İÇİN KULLANILAN MODAL HARFLERİ
+   SAHADA KULLANILMIYOR
+===================================================== */
+
+function getInitials(name){
+
+    const parts=
+        name.trim().split(" ");
+
+    if(
+        parts.length===1
+    ){
+
+        return parts[0]
+            .substring(0,2)
+            .toUpperCase();
+
+    }
+
+    return (
+        parts[0][0]+
+        parts[parts.length-1][0]
+    ).toUpperCase();
+
+}
+
+
+/* =====================================================
+   SAYAC
+===================================================== */
+
+function updateCounter(){
+
+    const count=
+        Object.keys(selected).length;
+
+    document.getElementById(
+        "counter"
+    ).innerText=
+        count+
+        " / 11 oyuncu";
+
+    document.getElementById(
+        "progressBar"
+    ).style.width=
+        (
+            count/11*100
+        )+
+        "%";
+
+    if(
+        count===11
+    ){
+
+        updateMOTM();
+
+    }
+
+}
+
+
+/* =====================================================
+   SIFIRLA
+===================================================== */
+
+function resetSquad(){
+
+    selected={};
+
+    motm="";
+
+    renderFormation();
+
+    updateCounter();
+
+    updateMOTM();
+
+    toast(
+        "Kadro sıfırlandı."
+    );
+
+}
+
+
+/* =====================================================
+   GÖRSEL KAYDET
+===================================================== */
+
+async function saveImage(){
+
+    if(
+        Object.keys(selected).length!==11
+    ){
+
+        toast(
+            "Önce 11 oyuncuyu tamamla."
+        );
+
+        return;
+    }
+
+    if(
+        motm===""
+    ){
+
+        toast(
+            "Önce maçın oyuncusunu seç."
+        );
+
+        document
+            .getElementById(
+                "motmSelect"
+            )
+            .focus();
+
+        return;
+    }
+
+    const pitch=
+        document.getElementById(
+            "pitch"
+        );
+
+    toast(
+        "Görsel hazırlanıyor..."
+    );
+
+    try{
+
+        const canvas=
+            await html2canvas(
+                pitch,
+                {
+                    scale:3,
+                    useCORS:true,
+                    backgroundColor:null,
+                    logging:false
                 }
-                
-                // Güncelle
-                predictions[userIndex].home = home;
-                predictions[userIndex].away = away;
-                
-                // Kazanan / Kaybeden şık uyarı simülasyonu mantığı (Örnek bildirimler)
-                statusDiv.innerHTML = '<div class="alert alert-success">🎉 Harika! Tahminin başarıyla güncellendi. (30 dk kuralı aktif)</div>';
-            } else {
-                // Yeni kayıt
-                predictions.push({
-                    nick: nick,
-                    home: home,
-                    away: away,
-                    time: now
-                });
-                
-                // İstediğin uyarı mesajları senaryosu (Kayıt anındaki karşılama uyarısı)
-                statusDiv.innerHTML = `
-                    <div class="alert alert-success">🏆 Tahminin sisteme işlendi Aslan! Maç sonu için şansın bol olsun.</div>
-                    <div class="alert alert-info" style="margin-top: 8px;">💡 Bilgi: Kaybedersen üzülmek yok, önümüzdeki maçlarda kral sensin!</div>
-                `;
-            }
+            );
 
-            localStorage.setItem(MATCH_KEY, JSON.stringify(predictions));
-            loadPredictions();
+        const link=
+            document.createElement(
+                "a"
+            );
+
+        const formation=
+            document
+                .getElementById(
+                    "formation"
+                )
+                .value
+                .replaceAll(
+                    "-",
+                    "_"
+                );
+
+        link.download=
+            "GALATASARAY-KADRO-"+
+            formation+
+            ".png";
+
+        link.href=
+            canvas.toDataURL(
+                "image/png"
+            );
+
+        link.click();
+
+        toast(
+            "Görsel kaydedildi! 📸"
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        toast(
+            "Görsel oluşturulamadı."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function toast(message){
+
+    const element=
+        document.getElementById(
+            "toast"
+        );
+
+    element.innerText=message;
+
+    element.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        toastTimer
+    );
+
+    toastTimer=
+        setTimeout(
+            ()=>{
+                element.classList.remove(
+                    "show"
+                );
+            },
+            2500
+        );
+
+}
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(
+            event.key==="Escape"
+        ){
+
+            closeModal();
+
         }
 
-        window.onload = loadPredictions;
-    </script>
+    }
+);
+
+
+/* =====================================================
+   BAŞLANGIÇ
+===================================================== */
+
+renderFormation();
+
+updateCounter();
+
+</script>
+
 </body>
 </html>
