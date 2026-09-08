@@ -2,9 +2,9 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>GALATASARAY | Şampiyonlar Ligi Tahmin Yarışması</title>
+<title>GSHD | Skor Düdüğü</title>
 
 <style>
 *{
@@ -14,1081 +14,1433 @@
 }
 
 :root{
-    --red:#a50000;
-    --red2:#d00000;
-    --yellow:#f5c400;
-    --dark:#080808;
-    --card:#111111;
-    --border:rgba(255,255,255,.09);
-    --text:#fff;
-    --muted:#999;
+    --yellow:#ffd900;
+    --yellow2:#ffad00;
+    --green:#55ff91;
+    --red:#ff3838;
+    --blue:#29a9ea;
 }
 
 body{
     min-height:100vh;
+    padding:24px 14px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
     background:
-        radial-gradient(circle at 50% -10%,rgba(190,0,0,.28),transparent 38%),
-        linear-gradient(135deg,#050505,#0e0e0e 50%,#050505);
-    color:var(--text);
-    font-family:Arial,Helvetica,sans-serif;
-    padding:20px;
+        radial-gradient(
+            circle at 50% -15%,
+            rgba(255,217,0,.13),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(255,255,255,.035),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(255,0,0,.045),
+            transparent 35%
+        ),
+        #020202;
+
+    color:#fff;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    overflow-x:hidden;
 }
 
-.container{
-    max-width:1050px;
-    margin:auto;
+.app{
+    width:min(940px,100%);
 }
 
 /* HEADER */
 
-.hero{
-    position:relative;
-    overflow:hidden;
-    border:1px solid rgba(255,200,0,.18);
-    background:
-        linear-gradient(135deg,rgba(170,0,0,.30),rgba(0,0,0,.85)),
-        #0b0b0b;
-    border-radius:24px;
-    padding:30px 24px;
+.header{
     text-align:center;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
-    margin-bottom:20px;
-}
-
-.hero:before{
-    content:"";
-    position:absolute;
-    width:300px;
-    height:300px;
-    background:rgba(255,190,0,.08);
-    filter:blur(70px);
-    border-radius:50%;
-    top:-180px;
-    left:50%;
-    transform:translateX(-50%);
+    margin-bottom:22px;
 }
 
 .badge{
-    position:relative;
-    display:inline-block;
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:2px;
-    color:#050505;
-    background:linear-gradient(90deg,var(--yellow),#ffe98a);
-    padding:7px 13px;
-    border-radius:30px;
-    margin-bottom:13px;
-}
-
-.hero h1{
-    position:relative;
-    font-size:clamp(25px,5vw,44px);
-    font-weight:900;
-    letter-spacing:-1px;
-}
-
-.hero h1 span{
-    color:var(--yellow);
-}
-
-.hero p{
-    position:relative;
-    color:#aaa;
-    margin-top:10px;
-    font-size:14px;
-}
-
-/* USER */
-
-.user-box{
-    background:rgba(17,17,17,.94);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:20px;
-    margin-bottom:20px;
-}
-
-.section-title{
-    font-size:17px;
-    font-weight:900;
-    margin-bottom:13px;
-}
-
-.input-row{
-    display:flex;
-    gap:10px;
-}
-
-.input{
-    width:100%;
-    border:1px solid #292929;
-    background:#080808;
-    color:#fff;
-    border-radius:12px;
-    padding:14px;
-    outline:none;
-    font-size:15px;
-}
-
-.input:focus{
-    border-color:var(--yellow);
-}
-
-.user-status{
-    margin-top:10px;
-    font-size:12px;
-    color:#888;
-}
-
-.user-status strong{
-    color:var(--yellow);
-}
-
-/* TIMER */
-
-.timer{
-    display:none;
-    margin-top:14px;
-    padding:13px;
-    border-radius:12px;
-    background:rgba(255,200,0,.07);
-    border:1px solid rgba(255,200,0,.18);
-    color:#ddd;
-    text-align:center;
-    font-size:13px;
-}
-
-.timer strong{
-    color:var(--yellow);
-    font-size:17px;
-}
-
-/* MATCHES */
-
-.matches{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:13px;
-}
-
-.match{
-    position:relative;
-    background:linear-gradient(145deg,#151515,#0c0c0c);
-    border:1px solid var(--border);
-    border-radius:17px;
-    padding:18px;
-    transition:.2s;
-}
-
-.match:hover{
-    border-color:rgba(255,200,0,.28);
-    transform:translateY(-2px);
-}
-
-.match-number{
-    color:var(--yellow);
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:1.5px;
-    margin-bottom:9px;
-}
-
-.teams{
-    display:flex;
+    display:inline-flex;
     align-items:center;
-    justify-content:center;
-    gap:9px;
-    font-size:14px;
-    font-weight:800;
-    min-height:40px;
-    text-align:center;
-}
-
-.team{
-    flex:1;
-}
-
-.vs{
-    color:#666;
-    font-size:10px;
-    font-weight:900;
-}
-
-.date{
-    text-align:center;
-    color:#777;
-    font-size:11px;
-    margin:8px 0 13px;
-}
-
-.score{
-    display:flex;
-    align-items:center;
-    justify-content:center;
     gap:8px;
-}
 
-.score input{
-    width:62px;
-    height:50px;
-    text-align:center;
-    font-size:23px;
+    padding:7px 15px;
+
+    border-radius:50px;
+
+    color:var(--yellow);
+
+    background:rgba(255,217,0,.055);
+
+    border:1px solid rgba(255,217,0,.2);
+
+    font-size:10px;
     font-weight:900;
-    color:#fff;
-    background:#070707;
-    border:1px solid #303030;
-    border-radius:11px;
-    outline:none;
-}
 
-.score input:focus{
-    border-color:var(--yellow);
-    box-shadow:0 0 0 3px rgba(255,200,0,.07);
-}
+    letter-spacing:2.5px;
 
-.score span{
-    color:#555;
-    font-weight:bold;
-}
-
-/* BUTTON */
-
-.submit-wrap{
-    margin-top:18px;
-}
-
-.submit{
-    width:100%;
-    border:0;
-    border-radius:14px;
-    padding:16px;
-    cursor:pointer;
-    color:#080808;
-    font-weight:900;
-    font-size:15px;
-    background:linear-gradient(90deg,var(--yellow),#ffe45e);
-    box-shadow:0 10px 30px rgba(255,195,0,.14);
-    transition:.2s;
-}
-
-.submit:hover{
-    transform:translateY(-2px);
-    filter:brightness(1.05);
-}
-
-.submit:disabled{
-    cursor:not-allowed;
-    background:#303030;
-    color:#777;
-    box-shadow:none;
-    transform:none;
-}
-
-/* PARTICIPANTS */
-
-.participants{
-    margin-top:28px;
-}
-
-.participants-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
     margin-bottom:12px;
 }
 
-.count{
-    background:#1c1c1c;
-    color:var(--yellow);
-    border:1px solid #292929;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:900;
-}
+.badge-dot{
+    width:7px;
+    height:7px;
 
-.users{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.participant{
-    background:linear-gradient(145deg,#151515,#0c0c0c);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:15px;
-}
-
-.participant-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.person{
-    display:flex;
-    align-items:center;
-    gap:11px;
-}
-
-.avatar{
-    width:39px;
-    height:39px;
     border-radius:50%;
-    display:flex;
+
+    background:var(--green);
+
+    box-shadow:0 0 12px var(--green);
+
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:.25;
+    }
+}
+
+.header h1{
+    font-size:clamp(27px,6vw,49px);
+
+    font-weight:950;
+
+    letter-spacing:-2px;
+}
+
+.header p{
+    margin-top:7px;
+
+    color:#666;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+}
+
+/* MAÇ KARTI */
+
+.match-card{
+    position:relative;
+
+    padding:
+        clamp(28px,6vw,58px)
+        clamp(17px,5vw,55px);
+
+    border-radius:32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(26,26,26,.95),
+            rgba(5,5,5,.98)
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.78),
+        inset 0 1px 0 rgba(255,255,255,.04);
+
+    overflow:hidden;
+}
+
+.match-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    background:rgba(255,217,0,.035);
+
+    filter:blur(90px);
+
+    top:-270px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    pointer-events:none;
+}
+
+/* TAKIMLAR */
+
+.teams{
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
     align-items:center;
-    justify-content:center;
-    background:linear-gradient(145deg,var(--red),#510000);
-    border:1px solid rgba(255,200,0,.25);
+
+    gap:24px;
+}
+
+.team{
+    text-align:center;
+}
+
+.team-name{
+    font-size:clamp(18px,4vw,30px);
+
+    font-weight:950;
+
+    letter-spacing:-.5px;
+}
+
+.sporting{
+    color:#fff;
+
+    text-shadow:
+        0 0 20px rgba(255,255,255,.12);
+}
+
+.galatasaray{
+    color:var(--yellow);
+
+    text-shadow:
+        0 0 12px rgba(255,217,0,.5),
+        0 0 35px rgba(255,174,0,.16);
+}
+
+.vs{
+    color:#444;
+
+    font-size:10px;
+
     font-weight:900;
+
+    letter-spacing:3px;
+}
+
+/* SKOR */
+
+.score-area{
+    text-align:center;
+
+    padding:
+        36px 0 29px;
+}
+
+.score{
+    display:inline-block;
+
+    min-width:250px;
+
+    font-size:
+        clamp(76px,18vw,150px);
+
+    line-height:.85;
+
+    font-weight:950;
+
+    letter-spacing:7px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff 0%,
+            #f3f3f3 32%,
+            #8a8a8a 100%
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    filter:
+        drop-shadow(
+            0 0 16px
+            rgba(255,255,255,.12)
+        );
+
+    transition:.12s;
+}
+
+.score.running{
+    animation:
+        scorePulse .11s infinite alternate;
+}
+
+@keyframes scorePulse{
+
+    from{
+        transform:scale(.97);
+
+        filter:
+            drop-shadow(
+                0 0 7px
+                rgba(255,255,255,.08)
+            );
+    }
+
+    to{
+        transform:scale(1.035);
+
+        filter:
+            drop-shadow(
+                0 0 27px
+                rgba(255,217,0,.2)
+            );
+    }
+}
+
+.status{
+    margin-top:18px;
+
+    color:#555;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:1.7px;
+}
+
+.status.running{
+    color:var(--green);
+}
+
+.status.stopped{
     color:var(--yellow);
 }
 
-.person-name{
-    font-weight:900;
-    font-size:14px;
-}
+/* BUTONLAR */
 
-.saved{
-    color:#6f6f6f;
-    font-size:10px;
-    margin-top:3px;
-}
+.controls{
+    width:min(650px,100%);
 
-.lock{
-    font-size:10px;
-    color:#888;
-    padding:6px 9px;
-    border-radius:20px;
-    background:#1b1b1b;
-}
+    margin:auto;
 
-.predictions{
-    margin-top:13px;
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:7px;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
 }
 
-.pred{
-    background:#090909;
-    border:1px solid #242424;
-    border-radius:9px;
-    padding:8px 5px;
-    text-align:center;
+button{
+    min-height:57px;
+
+    border:0;
+
+    border-radius:16px;
+
+    font-size:13px;
+
+    font-weight:950;
+
+    cursor:pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        opacity .2s;
 }
 
-.pred .small{
-    color:#666;
-    font-size:8px;
-    margin-bottom:3px;
+button:hover{
+    transform:translateY(-2px);
 }
 
-.pred .result{
+button:active{
+    transform:scale(.97);
+}
+
+.start{
+    color:#031109;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6aff9e,
+            #12bd5f
+        );
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,220,100,.13);
+}
+
+.stop{
     color:#fff;
-    font-size:13px;
-    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4b4b,
+            #c60000
+        );
+
+    box-shadow:
+        0 12px 30px
+        rgba(255,0,0,.13);
 }
 
-.empty{
-    text-align:center;
-    padding:30px;
-    color:#666;
-    border:1px dashed #292929;
-    border-radius:15px;
-    font-size:13px;
-}
+.reset{
+    grid-column:1/-1;
 
-/* TOAST */
+    color:#999;
 
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:22px;
-    transform:translate(-50%,120px);
-    opacity:0;
     background:#151515;
-    border:1px solid rgba(255,200,0,.25);
+
+    border:1px solid #292929;
+}
+
+button:disabled{
+    opacity:.28;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+/* SONUÇ */
+
+.result{
+    display:none;
+
+    margin-top:25px;
+
+    padding:25px 18px;
+
+    border-radius:23px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,217,0,.09),
+            rgba(255,255,255,.018)
+        );
+
+    border:
+        1px solid
+        rgba(255,217,0,.18);
+}
+
+.result.show{
+    display:block;
+
+    animation:
+        resultIn .5s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes resultIn{
+
+    from{
+        opacity:0;
+
+        transform:
+            translateY(18px)
+            scale(.96);
+    }
+
+    to{
+        opacity:1;
+
+        transform:none;
+    }
+}
+
+.result-label{
+    color:var(--yellow);
+
+    font-size:9px;
+
+    font-weight:950;
+
+    letter-spacing:3px;
+}
+
+.result-score{
+    margin-top:10px;
+
+    font-size:
+        clamp(21px,5vw,35px);
+
+    font-weight:950;
+
+    line-height:1.3;
+}
+
+.result-message{
+    margin-top:14px;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    background:rgba(0,0,0,.3);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    color:#aaa;
+
+    font-size:12px;
+
+    line-height:1.65;
+}
+
+/* TELEGRAM */
+
+.telegram{
+    width:100%;
+
+    margin-top:18px;
+
     color:#fff;
-    padding:13px 18px;
-    border-radius:12px;
-    font-size:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2ab4f2,
+            #168bd0
+        );
+
+    box-shadow:
+        0 12px 30px
+        rgba(42,180,242,.14);
+}
+
+.telegram:hover{
+    box-shadow:
+        0 15px 35px
+        rgba(42,180,242,.28);
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:15px;
+
+    text-align:center;
+
+    color:#383838;
+
+    font-size:9px;
+
     font-weight:700;
-    z-index:100;
-    transition:.3s;
-    box-shadow:0 15px 40px rgba(0,0,0,.5);
+
+    letter-spacing:1.5px;
 }
 
-.toast.show{
-    transform:translate(-50%,0);
-    opacity:1;
-}
+/* MOBİL */
 
-/* MOBILE */
+@media(max-width:600px){
 
-@media(max-width:700px){
     body{
-        padding:10px;
+        padding:18px 11px;
+
+        align-items:flex-start;
     }
 
-    .hero{
-        padding:25px 15px;
-        border-radius:19px;
+    .match-card{
+        border-radius:25px;
+
+        padding:30px 15px;
     }
 
-    .input-row{
-        flex-direction:column;
+    .teams{
+        gap:8px;
     }
 
-    .matches{
+    .team-name{
+        font-size:15px;
+    }
+
+    .vs{
+        font-size:8px;
+    }
+
+    .score-area{
+        padding:30px 0 25px;
+    }
+
+    .score{
+        min-width:0;
+
+        font-size:79px;
+
+        letter-spacing:4px;
+    }
+
+    .controls{
         grid-template-columns:1fr;
     }
 
-    .predictions{
-        grid-template-columns:repeat(2,1fr);
+    .reset{
+        grid-column:auto;
     }
 
-    .participant-top{
-        align-items:flex-start;
-    }
-}
-
-@media(max-width:400px){
-    .teams{
-        font-size:13px;
-    }
-
-    .score input{
-        width:55px;
+    button{
+        min-height:59px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
-<div class="container">
+<div class="app">
 
-    <div class="hero">
-        <div class="badge">UEFA CHAMPIONS LEAGUE</div>
-        <h1>GALATASARAY <span>TAHMİN</span> YARIŞMASI</h1>
-        <p>8 maç • Skorunu tahmin et • 30 dakika içinde değiştirebilirsin</p>
-    </div>
+    <header class="header">
 
-    <div class="user-box">
+        <div class="badge">
 
-        <div class="section-title">👤 Önce kendini tanıt</div>
+            <span class="badge-dot"></span>
 
-        <div class="input-row">
-            <input
-                id="username"
-                class="input"
-                type="text"
-                maxlength="30"
-                placeholder="Adın veya Telegram kullanıcı adın"
-                autocomplete="off"
-            >
+            GSHD • KAHİN ARANIYOR 
+
         </div>
 
-        <div id="userStatus" class="user-status">
-            Tahminlerini göndermek için önce adını veya Telegram nickini yaz.
-        </div>
+        <h1>
+            SKOR DÜDÜĞÜ
+        </h1>
 
-        <div id="timer" class="timer">
-            ⏱️ Tahminlerini değiştirmek için kalan süre:
-            <strong id="timerText">30:00</strong>
-        </div>
+        <p>
+            SPORTING LİZBON × GALATASARAY
+        </p>
 
-    </div>
-
-
-    <div class="section-title">🏆 Şampiyonlar Ligi Maçları</div>
-
-    <div id="matches" class="matches"></div>
-
-    <div class="submit-wrap">
-        <button id="submitBtn" class="submit" onclick="savePrediction()">
-            TAHMİNLERİMİ KAYDET
-        </button>
-    </div>
+    </header>
 
 
-    <div class="participants">
+    <section class="match-card">
 
-        <div class="participants-head">
-            <div class="section-title" style="margin:0">
-                👥 KATILIMCILAR
+        <div class="teams">
+
+            <div class="team">
+
+                <div class="team-name sporting">
+                    SPORTING LİZBON
+                </div>
+
             </div>
 
-            <div id="count" class="count">0 KİŞİ</div>
+
+            <div class="vs">
+                VS
+            </div>
+
+
+            <div class="team">
+
+                <div class="team-name galatasaray">
+                    GALATASARAY
+                </div>
+
+            </div>
+
         </div>
 
-        <div id="users" class="users"></div>
+
+        <div class="score-area">
+
+            <div
+                id="score"
+                class="score">
+
+                0 - 0
+
+            </div>
+
+
+            <div
+                id="status"
+                class="status">
+
+                SKOR MOTORU HAZIR
+
+            </div>
+
+        </div>
+
+
+        <div class="controls">
+
+            <button
+                id="startBtn"
+                class="start"
+                onclick="startGame()">
+
+                ▶   SKORU BAŞLAT
+
+            </button>
+
+
+            <button
+                id="stopBtn"
+                class="stop"
+                onclick="stopGame()"
+                disabled>
+
+                ■   DURDUR
+
+            </button>
+
+
+            <button
+                class="reset"
+                onclick="resetGame()">
+
+                ↻   YENİDEN BAŞLAT
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="result"
+            class="result">
+
+            <div
+                id="resultLabel"
+                class="result-label">
+
+                SONUÇ KİLİTLENDİ
+
+            </div>
+
+
+            <div
+                id="finalScore"
+                class="result-score">
+
+                SPORTING LİZBON
+                0 — 0
+                GALATASARAY
+
+            </div>
+
+
+            <div
+                id="message"
+                class="result-message">
+
+            </div>
+
+
+            <button
+                class="telegram"
+                onclick="shareTelegram()">
+
+                ✈  
+                TELEGRAM'DA PAYLAŞ
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <div class="footer">
+
+        GSHD • PREMIUM RANDOM SCORE SYSTEM • 0 — 9
 
     </div>
 
 </div>
 
-<div id="toast" class="toast"></div>
-
 
 <script>
 
-/* =========================================
-   GALATASARAY 2026/27 ŞAMPİYONLAR LİGİ
-   ========================================= */
+/* ==========================================
+   SİSTEM
+========================================== */
 
-const matches = [
-    {
-        id:1,
-        home:"Sporting CP",
-        away:"Galatasaray",
-        date:"9 Eylül 2026 • 22:00"
-    },
-    {
-        id:2,
-        home:"Galatasaray",
-        away:"Barcelona",
-        date:"13 Ekim 2026 • 22:00"
-    },
-    {
-        id:3,
-        home:"Lille",
-        away:"Galatasaray",
-        date:"21 Ekim 2026 • 19:45"
-    },
-    {
-        id:4,
-        home:"Galatasaray",
-        away:"Stuttgart",
-        date:"3 Kasım 2026 • 20:45"
-    },
-    {
-        id:5,
-        home:"Galatasaray",
-        away:"Aston Villa",
-        date:"24 Kasım 2026 • 20:45"
-    },
-    {
-        id:6,
-        home:"AEK Athens",
-        away:"Galatasaray",
-        date:"8 Aralık 2026 • 23:00"
-    },
-    {
-        id:7,
-        home:"Galatasaray",
-        away:"Feyenoord",
-        date:"19 Ocak 2027 • 20:45"
-    },
-    {
-        id:8,
-        home:"Paris Saint-Germain",
-        away:"Galatasaray",
-        date:"27 Ocak 2027 • 23:00"
+let timer = null;
+let running = false;
+
+let homeScore = 0;
+let awayScore = 0;
+
+
+/* ==========================================
+   0 - 9 ARASI TÜM SKORLAR
+========================================== */
+
+const scorePool = [];
+
+for(let home = 0; home <= 9; home++){
+
+    for(let away = 0; away <= 9; away++){
+
+        scorePool.push([
+            home,
+            away
+        ]);
+
     }
+
+}
+
+
+/* ==========================================
+   GALATASARAY KAZANIRSA
+   SPORTING TROLL
+========================================== */
+
+const galaWinMessages = [
+
+    "Hocam bir daha bu işlere kalkışma. Lizbon'dan Galatasaray'a karşı çıkmak kolay değil. 😂",
+
+    "Sporting bugün sahaya çıkmış ama maçtan çıkarken başka bir takım olarak dönmüş. 😂",
+
+    "Lizbon'da bugün erken kapanış var. Sporting'in futbol departmanı mesaiyi erkenden bitirdi. 😭",
+
+    "Sporting için güzel başlayan hikâyenin son sayfasını Galatasaray yazdı. 🦁",
+
+    "Hocam Sporting, Galatasaray'ı görünce neden bu kadar ısrar ettiniz? 😂",
+
+    "Lizbon sokaklarında şu an tek soru var: 'Biz neden Galatasaray'a bulaştık?' 😂",
+
+    "Sporting taktik tahtasını kapatsın, bugünlük yeter. 😎",
+
+    "Galatasaray kazandı. Sporting yönetimi acil toplantı butonunu arıyor. 😂",
+
+    "Lizbon'da VAR odasından değil, muhasebeden ses geliyor: 'Bu mağlubiyetin maliyeti nedir?' 😂",
+
+    "Sporting'in planı güzeldi. Galatasaray planı görünce planın fişini çekti. 😎",
+
+    "Hocam bir daha Galatasaray'a bulaşmayalım, rica ediyoruz. 😂",
+
+    "Sporting bugün rakip seçme konusunda küçük bir stratejik hata yapmış olabilir. 😭",
+
+    "Galatasaray aldı yürüdü, Sporting arkasından sadece baktı. 😂",
+
+    "Lizbon'da bu akşam skor tabelasına uzun uzun bakılacak. 😂",
+
+    "Sporting savunması bugün 'bir şeyler ters gidiyor' toplantısını sahada yaptı. 😭",
+
+    "Galatasaray kazandı. Sporting'in eve dönüş yolculuğu biraz sessiz geçecek. 😂",
+
+    "Lizbon'da futbol konuşuluyor, ama Sporting tarafında konu değiştirme eğilimi yüksek. 😂",
+
+    "Sporting'e geçmiş olsun. Hocam gerçekten bir daha bu işlere kalkışma. 😂",
+
+    "Bugün Sporting için futbol değil, GSHD tarafından hazırlanan sabır testi vardı. 😎",
+
+    "Galatasaray sahadan galip çıktı. Sporting'in bahanesi henüz yükleniyor... ⏳😂",
+
+    "Sporting topa sahip oldu, Galatasaray skora sahip oldu. 😏",
+
+    "Lizbon ekibi bugün sarı-kırmızı alarmı biraz geç fark etti. 😂",
+
+    "Sporting için gecenin özeti: güzel şehir, kötü skor. 😂",
+
+    "Hocam Sporting, Galatasaray'a karşı bu kadar özgüven nereden geldi? 😂",
+
+    "Lizbon'da bugün fado müziği yerine sessizlik tercih edilecek gibi. 😭",
+
+    "Sporting yönetimi şu anda 'bunu nasıl açıklayacağız?' başlığı altında çalışıyor. 😂",
+
+    "Galatasaray kazandı. Sporting'in gece planına 'skor tartışması' eklendi. 😂",
+
+    "Sporting bugün Galatasaray'a karşı biraz fazla cesur davrandı. Sonuç dosyada mevcut. 😎",
+
+    "Lizbon'dan sevgiler. Skor tabelası da sevgilerini iletti. 😂",
+
+    "Hocam bir daha kalkışmayın. GSHD Skor Düdüğü bile Sporting'e acımadı. 😂"
+
 ];
 
 
-/* =========================================
-   STORAGE
-   ========================================= */
+/* ==========================================
+   GALATASARAY KAYBEDERSE BİLE
+   GALATASARAY'A DOKUNMA
+   SPORTING'E TROLL DEVAM
+========================================== */
 
-const STORAGE_KEY = "gs_tahmin_yarismasi_v1";
+const galaLossMessages = [
 
-function getUsers(){
-    try{
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    }catch(e){
-        return [];
-    }
-}
+    "Sporting kazandı ama hocam bir daha bu işlere kalkışma. Galatasaray'ın sabrını fazla zorlamayın. 😂",
 
-function saveUsers(users){
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(users));
-}
+    "Sporting skoru aldı. Lizbon'da kutlama serbest, ama rövanş dosyasını da masaya koysunlar. 😎",
 
+    "Bugün Sporting güldü. Fazla alışmayın hocam. 😂",
 
-/* =========================================
-   MATCH UI
-   ========================================= */
+    "Sporting kazandı diye Lizbon'da milli bayram ilan etmeyin, sakin olun. 😂",
 
-function renderMatches(){
+    "Hocam Sporting, bu skor sizi biraz fazla havaya sokmasın. 😏",
 
-    const container = document.getElementById("matches");
+    "Sporting bugün kazandı. Yönetim hemen heykel yaptırmaya başlamasın. 😂",
 
-    container.innerHTML = matches.map(match => `
-        <div class="match">
+    "Lizbon'da kutlamalar başladı. Birileri Sporting'e Galatasaray'ı yendiklerini hatırlatıyor. 😂",
 
-            <div class="match-number">
-                MAÇ ${match.id}
-            </div>
+    "Sporting kazandı ama skor tabelasına bakıp fazla büyümeyin. 😂",
 
-            <div class="teams">
-                <div class="team">${match.home}</div>
-                <div class="vs">VS</div>
-                <div class="team">${match.away}</div>
-            </div>
+    "Hocam bugün sizlikmiş. Tebrikler. Ama bir daha bu kadar cesur olmayın. 😎",
 
-            <div class="date">
-                ${match.date}
-            </div>
+    "Sporting için güzel gece. Lizbon'da ışıkları biraz daha açık bırakabilirler. 😂",
 
-            <div class="score">
+    "Bugün Sporting'in gecesi. Ama hocam bu kadar sevinmek de biraz ayıp. 😂",
 
-                <input
-                    type="number"
-                    min="0"
-                    max="99"
-                    inputmode="numeric"
-                    id="home-${match.id}"
-                    placeholder="0"
-                >
+    "Sporting kazandı. Lizbon'da şu an 'biz gerçekten yaptık mı?' toplantısı yapılıyor. 😂",
 
-                <span>—</span>
+    "Tebrikler Sporting. Bugünlük size izin çıktı. 😂",
 
-                <input
-                    type="number"
-                    min="0"
-                    max="99"
-                    inputmode="numeric"
-                    id="away-${match.id}"
-                    placeholder="0"
-                >
+    "Sporting bugün üç puanı aldı, özgüveni de yanında hediye geldi. 😂",
 
-            </div>
+    "Lizbon'da bugün Sporting taraftarı rahat uyuyabilir. Yarın tekrar normale dönersiniz. 😂",
 
-        </div>
-    `).join("");
-}
+    "Sporting kazandı. Hocam bunu çerçeveletip duvara asabilirsiniz. 😂",
 
+    "Bugün Sporting güldü. GSHD Skor Düdüğü bu anı arşivledi. 😎",
 
-/* =========================================
-   USER SEARCH
-   ========================================= */
+    "Sporting için tarihî gece. Galatasaray'ı yenmek kolay iş değil; fazla da alışmayın. 😂",
 
-const usernameInput = document.getElementById("username");
+    "Lizbon'da kutlama var. Haklılar... ama biraz sessiz kutlayın hocam. 😂",
 
-usernameInput.addEventListener("input",loadUser);
+    "Sporting bu skorla kendisini şampiyon ilan etmeden önce sakin bir nefes alsın. 😂",
 
-usernameInput.addEventListener("change",loadUser);
+    "Hocam Sporting, bugün iyi iş çıkardınız. Ama bir daha bu işlere kalkışmayın. 😂",
 
+    "Sporting kazandı diye Lizbon sokaklarında konvoy başlatmak biraz erken olabilir. 😭",
 
-function normalizeName(name){
-    return name.trim().toLowerCase();
-}
+    "Bugün Sporting'e laf yok. Ama yarın tekrar konuşuruz. 😂",
 
+    "Sporting bu akşamlık üstünlüğü aldı. Tebrikler, dosya kapandı... şimdilik. 😏",
 
-function loadUser(){
+    "Lizbon ekibi bugün moral depoladı. Depoyu fazla doldurmayın. 😂",
 
-    const name = usernameInput.value.trim();
+    "Sporting kazandı. Galatasaray'a laf yok; bugünlük Sporting'i tebrik edip geçiyoruz. 😎",
 
-    if(!name){
+    "Hocam Sporting, bu sonucu uzun süre anlatabilirsiniz. Çünkü kolay gelmez. 😂",
 
-        document.getElementById("userStatus").innerHTML =
-            "Tahminlerini göndermek için önce adını veya Telegram nickini yaz.";
+    "Bugün Sporting tarafında yüzler gülüyor. GSHD bu görüntüyü kaydetti. 😂",
 
-        document.getElementById("timer").style.display = "none";
+    "Sporting için güzel sonuç. Fakat hocam bir daha bu işlere kalkışma. 😂",
 
-        unlockInputs();
+    "Lizbon'da bugün 'Galatasaray'ı yendik' cümlesi fazla mesai yapacak. 😂",
 
-        return;
-    }
+    "Sporting kazandı. Tebrikler hocam. Ama bu kadar rahatlamayın, futbol uzun. 😏",
 
-    const users = getUsers();
+    "Bugün Sporting'in hanesine artı yazıldı. Biz de notumuzu aldık. 😂",
 
-    const user = users.find(
-        u => normalizeName(u.name) === normalizeName(name)
-    );
+    "Sporting'in keyfi yerinde. Lizbon'da kahveler bugün biraz daha tatlı içilecek. 😂",
 
-    if(!user){
+    "Hocam bu sefer oldu. Bir daha denemek konusunda acele etmeyin. 😂",
 
-        document.getElementById("userStatus").innerHTML =
-            "Yeni katılımcı. <strong>8 maçın tamamına</strong> tahmin yapabilirsin.";
+    "Sporting bugün skor tabelasının patronu oldu. Tebrikler. Ama tacı fazla uzun takmayın. 😂",
 
-        document.getElementById("timer").style.display = "none";
+    "Lizbon'da bugün herkes Sporting konuşuyor. Hak ettiniz hocam, bu seferlik. 😂",
 
-        unlockInputs();
+    "Sporting kazandı. Galatasaray'a sataşmak yok; bütün troll kontenjanı Sporting'e ayrıldı. 😂",
 
-        clearInputs();
+    "Hocam Sporting, güzel oynadınız. Şimdi kupayı kaldırmadan önce bir sakinleşin. 😂",
 
-        return;
-    }
+    "Bugün Sporting kazandı. GSHD kararı kesin: Sporting tebrik edildi, ama fazla şımartılmadı. 😂"
 
-    /* Kullanıcı varsa tahminlerini getir */
-
-    fillInputs(user.predictions);
-
-    updateUserTimer(user);
-
-}
+];
 
 
-/* =========================================
-   INPUTS
-   ========================================= */
+/* ==========================================
+   BERABERLİK
+========================================== */
 
-function clearInputs(){
+const drawMessages = [
 
-    matches.forEach(match => {
+    "Kimse kazanamadı. Sporting de Galatasaray da eve dönüyor. Ama hocam Sporting, bir daha bu işlere kalkışma. 😂",
 
-        document.getElementById(`home-${match.id}`).value = "";
-        document.getElementById(`away-${match.id}`).value = "";
+    "Beraberlik. Sporting bugün şansını denedi, ama dosya kapanmadı. 😎",
 
-    });
+    "Lizbon ekibi galibiyeti alamadı. Bugünlük sakin kalıyoruz. 😂",
 
-}
+    "Sporting beraberliğe razı oldu. Galatasaray da 'tamam hocam' dedi. 😂",
+
+    "Ne Sporting kazandı ne Galatasaray. Ama Sporting tarafı yine de biraz düşünmeli. 😂",
+
+    "Lizbon'da hesaplar yeniden yapılıyor. Sonuç: Beraberlik. 😂",
+
+    "Sporting bir puanı aldı ve eve gitti. Fazlasını istemek riskli olurdu. 😏",
+
+    "Hocam Sporting, bugünlük kurtuldunuz. Bir daha bu işlere kalkışmayın. 😂",
+
+    "Skor eşit. Sporting'in kutlama bütçesi iptal edildi. 😂",
+
+    "Galatasaray kaybetmedi. Sporting de kazanamadı. Bu gece herkes sakin. 😎",
+
+    "Lizbon'da bugün büyük kutlama yok. Çünkü skor tabelası izin vermedi. 😂",
+
+    "Sporting galibiyeti bekledi, skor başka karar verdi. 😂",
+
+    "Beraberlik geldi. Sporting yönetimi 'olsun' toplantısına geçti. 😂",
+
+    "Bugün Sporting'e ne zafer ne de mazeret çıktı. Sadece beraberlik. 😂",
+
+    "Sporting için sonuç: Ne sevinecek kadar iyi, ne üzülecek kadar kötü. 😂",
+
+    "Hocam Sporting, bu seferlik beraberlik. Bir daha fazla zorlamayın. 😂",
+
+    "Lizbon ekibi bir puanla yetinmek zorunda kaldı. Gecenin özeti bu. 😎",
+
+    "Sporting kazanamadı. Galatasaray da kaybetmedi. GSHD kararını verdi. 😂",
+
+    "Skor kilitlendi. Sporting'in galibiyet hayalleri şimdilik bekleme odasında. 😂",
+
+    "Beraberlik. Sporting'in gece planına 'erken yatış' eklendi. 😂",
+
+    "Bugün Sporting'in keyfi yarım kaldı. Skor tabelası izin vermedi. 😂",
+
+    "Sporting, hocam siz bu işi biraz daha düşünün. 😂",
+
+    "Lizbon tarafında 'bir dahaki maç' cümlesi şimdiden başladı. 😂",
+
+    "GSHD Skor Düdüğü kararını verdi: Sporting bugün tam olarak istediğini alamadı. 😎",
+
+    "Beraberlik çıktı. Sporting için küçük bir 'hocam sakin' uyarısı. 😂"
+
+];
 
 
-function fillInputs(predictions){
+/* ==========================================
+   RANDOM SKOR
+========================================== */
 
-    matches.forEach(match => {
+function randomScore(){
 
-        const prediction = predictions.find(
-            p => p.id === match.id
+    const index =
+        Math.floor(
+            Math.random() *
+            scorePool.length
         );
 
-        document.getElementById(`home-${match.id}`).value =
-            prediction ? prediction.home : "";
+    homeScore =
+        scorePool[index][0];
 
-        document.getElementById(`away-${match.id}`).value =
-            prediction ? prediction.away : "";
+    awayScore =
+        scorePool[index][1];
 
-    });
-
+    document.getElementById(
+        "score"
+    ).textContent =
+        homeScore +
+        " - " +
+        awayScore;
 }
 
 
-function lockInputs(){
+/* ==========================================
+   MESAJ SEÇ
+========================================== */
 
-    matches.forEach(match => {
+function getResultMessage(){
 
-        document.getElementById(`home-${match.id}`).disabled = true;
-        document.getElementById(`away-${match.id}`).disabled = true;
+    let messages;
 
-    });
+    /*
+        ÖNEMLİ:
 
-    document.getElementById("submitBtn").disabled = true;
+        Galatasaray hiçbir sonuçta
+        zorbalanmıyor.
 
-}
+        Bütün mizah Sporting
+        üzerinden dönüyor.
+    */
 
+    if(awayScore > homeScore){
 
-function unlockInputs(){
-
-    matches.forEach(match => {
-
-        document.getElementById(`home-${match.id}`).disabled = false;
-        document.getElementById(`away-${match.id}`).disabled = false;
-
-    });
-
-    document.getElementById("submitBtn").disabled = false;
-
-}
-
-
-/* =========================================
-   SAVE
-   ========================================= */
-
-function savePrediction(){
-
-    const name = usernameInput.value.trim();
-
-    if(!name){
-
-        showToast("Önce adını veya Telegram nickini yaz.");
-
-        usernameInput.focus();
-
-        return;
-    }
-
-
-    const users = getUsers();
-
-    const normalized = normalizeName(name);
-
-    let user = users.find(
-        u => normalizeName(u.name) === normalized
-    );
-
-
-    /* Var olan kullanıcı */
-
-    if(user){
-
-        const deadline = user.createdAt + (30 * 60 * 1000);
-
-        if(Date.now() >= deadline){
-
-            showToast("30 dakikalık değişiklik süren doldu.");
-
-            lockInputs();
-
-            updateUserTimer(user);
-
-            return;
-        }
-
-        user.predictions = collectPredictions();
-
-        user.updatedAt = Date.now();
+        messages = galaWinMessages;
 
     }
 
+    else if(homeScore > awayScore){
 
-    /* Yeni kullanıcı */
+        messages = galaLossMessages;
+
+    }
 
     else{
 
-        user = {
-            id:Date.now().toString(),
-            name:name,
-            createdAt:Date.now(),
-            updatedAt:Date.now(),
-            predictions:collectPredictions()
-        };
-
-        users.push(user);
+        messages = drawMessages;
 
     }
 
+    const index =
+        Math.floor(
+            Math.random() *
+            messages.length
+        );
 
-    saveUsers(users);
+    return messages[index];
+}
 
-    updateUserTimer(user);
 
-    renderUsers();
+/* ==========================================
+   BAŞLAT
+========================================== */
 
-    showToast(
-        user.updatedAt === user.createdAt
-        ? "Tahminlerin başarıyla kaydedildi!"
-        : "Tahminlerin güncellendi!"
+function startGame(){
+
+    if(running) return;
+
+    running = true;
+
+    document.getElementById(
+        "startBtn"
+    ).disabled = true;
+
+    document.getElementById(
+        "stopBtn"
+    ).disabled = false;
+
+    document.getElementById(
+        "result"
+    ).classList.remove(
+        "show"
     );
 
+    document.getElementById(
+        "score"
+    ).classList.add(
+        "running"
+    );
+
+    document.getElementById(
+        "status"
+    ).textContent =
+        "SKOR MOTORU ÇALIŞIYOR...";
+
+    document.getElementById(
+        "status"
+    ).className =
+        "status running";
+
+    timer = setInterval(
+        randomScore,
+        25
+    );
 }
 
 
-function collectPredictions(){
+/* ==========================================
+   DURDUR
+========================================== */
 
-    return matches.map(match => {
+function stopGame(){
 
-        let home = document.getElementById(`home-${match.id}`).value;
-        let away = document.getElementById(`away-${match.id}`).value;
+    if(!running) return;
 
-        return {
-            id:match.id,
-            home:home === "" ? "-" : home,
-            away:away === "" ? "-" : away
-        };
+    running = false;
 
-    });
+    clearInterval(timer);
+
+    document.getElementById(
+        "score"
+    ).classList.remove(
+        "running"
+    );
+
+    document.getElementById(
+        "stopBtn"
+    ).disabled = true;
+
+    document.getElementById(
+        "status"
+    ).textContent =
+        "SKOR KİLİTLENDİ • KARAR KESİN";
+
+    document.getElementById(
+        "status"
+    ).className =
+        "status stopped";
+
+
+    /* SONUÇ */
+
+    document.getElementById(
+        "finalScore"
+    ).textContent =
+        "SPORTING LİZBON " +
+        homeScore +
+        " — " +
+        awayScore +
+        " GALATASARAY";
+
+
+    /* MESAJ */
+
+    document.getElementById(
+        "message"
+    ).textContent =
+        getResultMessage();
+
+
+    const result =
+        document.getElementById(
+            "result"
+        );
+
+
+    /*
+       Sonuca göre başlık
+    */
+
+    if(awayScore > homeScore){
+
+        document.getElementById(
+            "resultLabel"
+        ).textContent =
+            "🟡 GALATASARAY KAZANDI";
+
+    }
+
+    else if(homeScore > awayScore){
+
+        document.getElementById(
+            "resultLabel"
+        ).textContent =
+            "⚽ SPORTING KAZANDI";
+
+    }
+
+    else{
+
+        document.getElementById(
+            "resultLabel"
+        ).textContent =
+            "⚖ BERABERLİK";
+
+    }
+
+
+    result.classList.add(
+        "show"
+    );
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+function resetGame(){
+
+    clearInterval(timer);
+
+    running = false;
+
+    homeScore = 0;
+    awayScore = 0;
+
+
+    document.getElementById(
+        "score"
+    ).textContent =
+        "0 - 0";
+
+
+    document.getElementById(
+        "score"
+    ).classList.remove(
+        "running"
+    );
+
+
+    document.getElementById(
+        "status"
+    ).textContent =
+        "SKOR MOTORU HAZIR";
+
+
+    document.getElementById(
+        "status"
+    ).className =
+        "status";
+
+
+    document.getElementById(
+        "startBtn"
+    ).disabled = false;
+
+
+    document.getElementById(
+        "stopBtn"
+    ).disabled = true;
+
+
+    document.getElementById(
+        "result"
+    ).classList.remove(
+        "show"
+    );
+
+
+    document.getElementById(
+        "message"
+    ).textContent = "";
 
 }
 
 
-/* =========================================
-   TIMER
-   ========================================= */
+/* ==========================================
+   TELEGRAM
+========================================== */
 
-let timerInterval = null;
+function shareTelegram(){
 
-function updateUserTimer(user){
+    const message =
+        document.getElementById(
+            "message"
+        ).textContent;
 
-    clearInterval(timerInterval);
 
-    const timer = document.getElementById("timer");
-    const status = document.getElementById("userStatus");
+    let emoji = "⚽";
 
-    const deadline = user.createdAt + (30 * 60 * 1000);
 
-    timer.style.display = "block";
+    if(awayScore > homeScore){
 
-    function tick(){
+        emoji = "🟡🦁";
 
-        const remaining = deadline - Date.now();
+    }
 
-        if(remaining <= 0){
+    else if(homeScore > awayScore){
 
-            clearInterval(timerInterval);
+        emoji = "🦁";
 
-            document.getElementById("timerText").textContent = "SÜRE DOLDU";
+    }
 
-            status.innerHTML =
-                "🔒 <strong>Tahminlerin kilitlendi.</strong> Artık değişiklik yapılamaz.";
 
-            lockInputs();
+    const text =
 
-            return;
+        emoji +
+        " GSHD • SKOR DÜDÜĞÜ\n" +
+
+        "━━━━━━━━━━━━━━━━\n\n" +
+
+        "🏟 SPORTING LİZBON\n" +
+
+        "        " +
+        homeScore +
+        " — " +
+        awayScore +
+
+        "\n" +
+
+        "⭐ GALATASARAY\n\n" +
+
+        "🔒 SKOR KİLİTLENDİ\n\n" +
+
+        "💬 " +
+        message +
+
+        "\n\n" +
+
+        "🎯 GSHD • PREMIUM RANDOM SCORE SYSTEM";
+
+
+    /*
+       Lokal dosyada localhost/file
+       paylaşılmasın.
+
+       GitHub Pages / gerçek HTTPS
+       adresinde URL eklenir.
+    */
+
+    let urlPart = "";
+
+    if(
+        window.location.protocol === "http:" ||
+        window.location.protocol === "https:"
+    ){
+
+        urlPart =
+            "&url=" +
+            encodeURIComponent(
+                window.location.href
+            );
+
+    }
+
+
+    const telegramUrl =
+
+        "https://t.me/share/url" +
+
+        "?text=" +
+
+        encodeURIComponent(
+            text
+        ) +
+
+        urlPart;
+
+
+    window.open(
+        telegramUrl,
+        "_blank",
+        "noopener,noreferrer"
+    );
+}
+
+
+/* ==========================================
+   KLAVYE KONTROLÜ
+
+   ENTER / SPACE = BAŞLAT / DURDUR
+   R = RESET
+========================================== */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key === "Enter" ||
+            e.key === " "
+        ){
+
+            e.preventDefault();
+
+            if(running){
+
+                stopGame();
+
+            }
+
+            else{
+
+                startGame();
+
+            }
+
         }
 
-        const minutes = Math.floor(remaining / 60000);
-        const seconds = Math.floor((remaining % 60000) / 1000);
 
-        document.getElementById("timerText").textContent =
-            String(minutes).padStart(2,"0") + ":" +
-            String(seconds).padStart(2,"0");
+        if(
+            e.key.toLowerCase() === "r"
+        ){
 
-        status.innerHTML =
-            "Tahminlerin kayıtlı. <strong>30 dakika içinde değiştirebilirsin.</strong>";
+            resetGame();
+
+        }
 
     }
-
-    tick();
-
-    timerInterval = setInterval(tick,1000);
-
-}
-
-
-/* =========================================
-   PARTICIPANTS
-   ========================================= */
-
-function renderUsers(){
-
-    const users = getUsers();
-
-    const container = document.getElementById("users");
-
-    document.getElementById("count").textContent =
-        users.length + " KİŞİ";
-
-
-    if(users.length === 0){
-
-        container.innerHTML = `
-            <div class="empty">
-                Henüz katılımcı yok.<br>
-                İlk tahmini sen yap!
-            </div>
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML = users.map(user => {
-
-        const locked =
-            Date.now() >= user.createdAt + (30 * 60 * 1000);
-
-        const initials =
-            user.name
-            .replace("@","")
-            .substring(0,2)
-            .toUpperCase();
-
-
-        return `
-            <div class="participant">
-
-                <div class="participant-top">
-
-                    <div class="person">
-
-                        <div class="avatar">
-                            ${initials}
-                        </div>
-
-                        <div>
-                            <div class="person-name">
-                                ${escapeHTML(user.name)}
-                            </div>
-
-                            <div class="saved">
-                                Tahmin kaydı mevcut
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="lock">
-                        ${locked ? "🔒 Kilitli" : "✏️ Değiştirilebilir"}
-                    </div>
-
-                </div>
-
-
-                <div class="predictions">
-
-                    ${user.predictions.map((p,index) => {
-
-                        const m = matches.find(
-                            x => x.id === p.id
-                        );
-
-                        return `
-                            <div class="pred">
-
-                                <div class="small">
-                                    MAÇ ${m.id}
-                                </div>
-
-                                <div class="result">
-                                    ${p.home} - ${p.away}
-                                </div>
-
-                            </div>
-                        `;
-
-                    }).join("")}
-
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
-
-}
-
-
-/* =========================================
-   SECURITY / HTML ESCAPE
-   ========================================= */
-
-function escapeHTML(text){
-
-    return text
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-
-/* =========================================
-   TOAST
-   ========================================= */
-
-function showToast(message){
-
-    const toast = document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-        toast.classList.remove("show");
-    },2500);
-
-}
-
-
-/* =========================================
-   INIT
-   ========================================= */
-
-renderMatches();
-renderUsers();
+);
 
 </script>
 
