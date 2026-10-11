@@ -13,9 +13,8 @@
     <style>
         :root {
             --accent-gold: #ffd700;
-            --gs-red: #a90429;
+            --gs-red: #d50000;
             --gs-yellow: #fdb913;
-            --barca-blue: #004d98;
             --text-color: #ffffff;
         }
 
@@ -27,7 +26,7 @@
         }
 
         body {
-            background: radial-gradient(circle at center, #800016 0%, #3a0008 50%, #120003 100%);
+            background: radial-gradient(circle at center, #600010 0%, #2a0005 60%, #0d0002 100%);
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
@@ -37,15 +36,15 @@
         }
 
         .vip-card {
-            background: rgba(30, 5, 10, 0.65);
+            background: rgba(25, 3, 7, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 2px solid var(--gs-yellow);
             border-radius: 24px;
             padding: 30px;
             width: 100%;
-            max-width: 550px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(253, 185, 19, 0.25);
+            max-width: 500px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(253, 185, 19, 0.2);
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -78,7 +77,7 @@
 
         .header p {
             font-size: 0.85rem;
-            color: #e0e0e0;
+            color: #ccc;
             margin-bottom: 25px;
         }
 
@@ -110,7 +109,7 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .gs-logo { background: linear-gradient(135deg, var(--gs-red), var(--gs-yellow)); }
+        .gs-logo { background: linear-gradient(135deg, #a90429, #fdb913); }
         .barca-logo { background: linear-gradient(135deg, #004d98, #a50044); }
 
         .team-name {
@@ -119,6 +118,7 @@
             margin-bottom: 10px;
         }
 
+        /* SARI - KIRMIZI SPINNER KUTULARI */
         .score-display {
             width: 75px;
             height: 60px;
@@ -132,17 +132,20 @@
             justify-content: center;
             align-items: center;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .score-display.spinning {
-            color: #888;
-            animation: pulseGlow 0.2s infinite alternate;
+        /* DÖNÜŞ ANINDA SARI VE KIRMIZI YANIP SÖNME */
+        .score-display.spin-yellow {
+            border-color: var(--gs-yellow) !important;
+            color: var(--gs-yellow) !important;
+            box-shadow: 0 0 15px var(--gs-yellow);
         }
 
-        @keyframes pulseGlow {
-            from { border-color: rgba(253, 185, 19, 0.3); }
-            to { border-color: var(--gs-yellow); }
+        .score-display.spin-red {
+            border-color: var(--gs-red) !important;
+            color: var(--gs-red) !important;
+            box-shadow: 0 0 15px var(--gs-red);
         }
 
         .vs {
@@ -152,9 +155,9 @@
             padding: 0 10px;
         }
 
-        /* ANALİZ KUTUSU VE BAŞLIĞI */
+        /* MAÇ ANALİZİ KUTUSU */
         .analysis-wrapper {
-            background: rgba(15, 2, 5, 0.5);
+            background: rgba(10, 1, 3, 0.6);
             border: 1px solid rgba(253, 185, 19, 0.4);
             border-radius: 12px;
             padding: 15px;
@@ -203,7 +206,7 @@
             gap: 8px;
             transition: all 0.3s ease;
             font-size: 0.85rem;
-            min-width: 130px;
+            min-width: 120px;
         }
 
         .btn-predict {
@@ -240,11 +243,11 @@
 <body>
 
     <div class="vip-card" id="captureCard">
-        <div class="vip-badge">GSHD TAHMİN</div>
+        <div class="vip-badge" data-html2canvas-ignore="true">TAHMİN</div>
         
         <div class="header">
             <h1>DEV EŞLEŞME</h1>
-            <p>Galatasaray x Barcelona Tahmin Ekranı</p>
+            <p data-html2canvas-ignore="true">Galatasaray x Barcelona Tahmin Ekranı</p>
         </div>
 
         <div class="match-container">
@@ -252,7 +255,7 @@
             <div class="team">
                 <div class="team-logo gs-logo">GS</div>
                 <div class="team-name">Galatasaray</div>
-                <div id="gsScore" class="score-display">2</div>
+                <div id="gsScore" class="score-display">?</div>
             </div>
 
             <div class="vs">VS</div>
@@ -261,21 +264,21 @@
             <div class="team">
                 <div class="team-logo barca-logo">BAR</div>
                 <div class="team-name">Barcelona</div>
-                <div id="barcaScore" class="score-display">1</div>
+                <div id="barcaScore" class="score-display">?</div>
             </div>
         </div>
 
-        <!-- MAÇ ANALİZİ VE MİZAHİ YORUM ALANI -->
+        <!-- MAÇ ANALİZİ KUTUSU -->
         <div class="analysis-wrapper">
             <div class="analysis-title">
                 <i class="fa-solid fa-chart-line"></i> Maç Analizi
             </div>
             <div class="comment-box" id="commentText">
-                "Skoru belirleyin ve maçı analiz edin!"
+                "Skoru belirlemek için aşağıdaki butona basın!"
             </div>
         </div>
 
-        <!-- BUTONLAR (Görsel kaydedilirken gizlenir) -->
+        <!-- BUTONLAR (Görsel kaydedilirken/paylaşılırken görünmez) -->
         <div class="btn-group" data-html2canvas-ignore="true">
             <button class="btn btn-predict" id="spinBtn" onclick="toggleSpin()">
                 <i class="fa-solid fa-dice"></i> Skoru Belirle
@@ -290,7 +293,7 @@
     </div>
 
     <script>
-        // GALATASARAY GALİBİYETİ YORUMLARI
+        // MİZAHİ YORUM LİSTELERİ
         const gsComments = [
             "RAMS Park'ta uzay takımı gelse söker atar! Aslan kükredi bir kere! 🦁",
             "Camp Nou yetkilileri ne olduğunu anlamadan İstanbul uçak biletlerini kontrol ediyor...",
@@ -298,13 +301,11 @@
             "Taktik maktik yok, bam bam bam! Tiki-taka buraya kadar!",
             "İspanyollar paella yemeyi bıraktı, baklava siparişi veriyor!",
             "Katalan basını şokta: 'İstanbul'da kaybolduk, pusulamız bozuldu!'",
-            "Osimhen ve Leao gol şov yaptı, Barcelona defansı tatile erken çıktı!",
+            "Osimhen gol şov yaptı, Barcelona defansı tatile erken çıktı!",
             "Boğaz'ın kırmızı-sarı suları Barcelona'yı yuttu!",
-            "Avrupa Fatihi genleri devreye girdi, Katalanlar şaşkın!",
-            "Katalonya'da hüzün hakim: 'Biz neye uğradık böyle?'"
+            "Avrupa Fatihi genleri devreye girdi, Katalanlar şaşkın!"
         ];
 
-        // BARCELONA GALİBİYETİ YORUMLARI
         const barcaComments = [
             "Tiki-taka İstanbul sahillerine kadar indi, bu skor can yakar...",
             "Barça uzay futbolu oynadı, bizimkiler uzaydan gelen topu izledi.",
@@ -312,39 +313,28 @@
             "Skor panosu bozulmadıysa Barcelona şov yapmış demektir...",
             "İspanyol rüzgarı sert esti, kalecimizin eldivenleri buharlaştı!",
             "Pas yüzdesi %98 olunca top bize hiç gelmedi desek yeridir...",
-            "Barcelona taktiği çözülemedi, UEFA araya girdi sanırım!",
-            "Katalanlar şovunu yaptı, İstanbul'dan 3 puanla döndü.",
-            "Işıklar kapandı, Barcelona geceyi aydınlattı...",
-            "Saha ortasında tiki-taka dersi verildi, ders ücreti skor panosunda!"
+            "Barcelona taktiği çözülemedi, UEFA araya girdi sanırım!"
         ];
 
-        // BERABERLİK YORUMLARI
         const drawComments = [
             "Dostluk kazandı ama iki tarafın da kalbi duruyordu! Harika bir maç!",
             "Şampiyonlar Ligi kalitesinde bir beraberlik! Kimse üzülmedi.",
-            "Tiki-taka ile Bam-Bam-Bam çakıştı, nötr alan oluştu! 0x0 etki.",
+            "Tiki-taka ile Bam-Bam-Bam çakıştı, nötr alan oluştu!",
             "İki dev yenişemedi, rövanş maçı sinemalarda!",
             "Ne Aslan pes etti ne de Katalanlar! Sonuç: Kardeşlik berabere.",
-            "90 dakika boyunca iki taraf da ne var ne yok sahaya döktü!",
-            "Her iki teknik direktör de maç sonu el sıkışıp helalleşti.",
-            "Direkler sallandı, kaleciler devleşti, maç berabere bitti!",
-            "İki takım da birer puanı cebine koydu, dostça ayrıldı.",
-            "Ne Katalunya güldü ne de İstanbul, tam bir taktik savaşı!"
+            "90 dakika boyunca iki taraf da ne var ne yok sahaya döktü!"
         ];
 
-        // ÇOK GOLLÜ MAÇ YORUMLARI (+7 Gol)
         const crazyComments = [
             "Bu skor halı sahada bile çıkmaz! FIFA oynasalar bu kadar gol olmazdı!",
             "Defanslar maça gelmeyi unuttu sanırım, kaleciler istifasını verdi!",
-            "Tarihe geçecek bir tenis maçı skoru! Seyirciler ayakta alkışlıyor!",
-            "Hakem düdüğü çalmaktan yoruldu, basketbol skoru gibi maç!",
-            "Saha çizgisini çekmeyi unutmuşlar, her gelen şut gol oldu!"
+            "Tarihe geçecek bir tenis maçı skoru! Seyirciler ayakta alkışlıyor!"
         ];
 
         let isSpinning = false;
         let spinInterval;
-        let currentGs = 2;
-        let currentBarca = 1;
+        let currentGs = null;
+        let currentBarca = null;
 
         function toggleSpin() {
             const spinBtn = document.getElementById('spinBtn');
@@ -354,25 +344,30 @@
 
             if (!isSpinning) {
                 isSpinning = true;
-                spinBtn.innerHTML = '<i class="fa-solid fa-hand"></i> Skoru Kilitle!';
+                spinBtn.innerHTML = '<i class="fa-solid fa-hand"></i> Skoru Durdur!';
                 spinBtn.style.background = 'linear-gradient(45deg, #D50000, #FF1744)';
                 spinBtn.style.color = '#fff';
-                gsBox.classList.add('spinning');
-                barcaBox.classList.add('spinning');
-                commentBox.innerText = '"Top kapışılıyor, maç analizi bekleniyor..."';
+
+                // Bir taraf Sarı, Bir taraf Kırmızı efekt
+                gsBox.classList.add('spin-yellow');
+                barcaBox.classList.add('spin-red');
+
+                commentBox.innerText = '"Kader belirleniyor, skorlar dönüyor..."';
 
                 spinInterval = setInterval(() => {
-                    currentGs = Math.floor(Math.random() * 6);
-                    currentBarca = Math.floor(Math.random() * 6);
+                    currentGs = Math.floor(Math.random() * 5); // 0-4 arası
+                    currentBarca = Math.floor(Math.random() * 5);
                     gsBox.innerText = currentGs;
                     barcaBox.innerText = currentBarca;
-                }, 80);
+                }, 70);
             } else {
                 clearInterval(spinInterval);
                 isSpinning = false;
-                gsBox.classList.remove('spinning');
-                barcaBox.classList.remove('spinning');
-                spinBtn.innerHTML = '<i class="fa-solid fa-dice"></i> Skoru Belirle';
+
+                gsBox.classList.remove('spin-yellow');
+                barcaBox.classList.remove('spin-red');
+
+                spinBtn.innerHTML = '<i class="fa-solid fa-dice"></i> Yeniden Belirle';
                 spinBtn.style.background = 'linear-gradient(45deg, var(--gs-yellow), #ffa500)';
                 spinBtn.style.color = '#000';
 
@@ -384,7 +379,7 @@
             const commentBox = document.getElementById('commentText');
             let comment = "";
 
-            if (gs + barca > 7) {
+            if (gs + barca >= 7) {
                 comment = crazyComments[Math.floor(Math.random() * crazyComments.length)];
             } else if (gs > barca) {
                 comment = gsComments[Math.floor(Math.random() * gsComments.length)];
@@ -398,21 +393,21 @@
         }
 
         function shareTelegram() {
-            if (isSpinning) {
-                alert("Önce skoru kilitlemelisiniz!");
+            if (currentGs === null || isSpinning) {
+                alert("Önce skoru belirlemelisiniz!");
                 return;
             }
             const comment = document.getElementById('commentText').innerText;
 
-            const text = `🔥 *GSHD SKOR TAHMİNİ* 🔥\n\n🏆 *Galatasaray* ${currentGs} - ${currentBarca} *Barcelona*\n\n💬 *Maç Analizi:* ${comment}\n\nSen de tahminini yap!`;
+            const text = `🔥 *GALATASARAY vs BARCELONA* 🔥\n\n🏆 *Skor:* Galatasaray ${currentGs} - ${currentBarca} Barcelona\n\n💬 *Maç Analizi:* ${comment}\n\nSen de tahminini yap!`;
             const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(text)}`;
             
             window.open(telegramUrl, '_blank');
         }
 
         function downloadImage() {
-            if (isSpinning) {
-                alert("Önce skoru kilitlemelisiniz!");
+            if (currentGs === null || isSpinning) {
+                alert("Önce skoru belirlemelisiniz!");
                 return;
             }
             const card = document.getElementById('captureCard');
@@ -422,15 +417,11 @@
                 scale: 2
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'GS-BARCA-VIP-Tahmin.png';
+                link.download = 'GS-BARCA-Tahmin.png';
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
         }
-
-        window.onload = () => {
-            updateComment(currentGs, currentBarca);
-        };
     </script>
 </body>
 </html>
