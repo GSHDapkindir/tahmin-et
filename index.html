@@ -1,2286 +1,415 @@
-<!DOCTYPE html><html lang="tr">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Galatasaray × Kocaelispor</title><style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html,body{
-    width:100%;
-    min-height:100%;
-}
-
-body{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:18px;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color:#fff;
-
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(255,205,0,.16),
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(210,0,45,.14),
-            transparent 35%
-        ),
-        #050505;
-}
-
-
-/* ==============================
-   ANA ALAN
-============================== */
-
-.container{
-    width:100%;
-    max-width:440px;
-}
-
-.header{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.header-small{
-    color:#666;
-    font-size:9px;
-    font-weight:800;
-    letter-spacing:3px;
-    margin-bottom:9px;
-}
-
-.header h1{
-    font-size:25px;
-    font-weight:950;
-    letter-spacing:-.8px;
-}
-
-.header h1 span{
-    color:#ffd000;
-}
-
-.header p{
-    margin-top:8px;
-    color:#666;
-    font-size:11px;
-}
-
-
-/* ==============================
-   KART
-============================== */
-
-.card{
-    position:relative;
-    overflow:hidden;
-
-    width:100%;
-
-    padding:24px 20px 20px;
-
-    border-radius:29px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #171717,
-            #080808
-        );
-
-    border:1px solid
-        rgba(255,205,0,.22);
-
-    box-shadow:
-        0 30px 90px rgba(0,0,0,.82),
-        0 0 55px rgba(255,0,40,.07);
-}
-
-.card:before{
-    content:"";
-
-    position:absolute;
-
-    width:240px;
-    height:240px;
-
-    left:50%;
-    top:-170px;
-
-    transform:translateX(-50%);
-
-    border-radius:50%;
-
-    background:
-        rgba(255,205,0,.08);
-
-    filter:blur(45px);
-
-    pointer-events:none;
-}
-
-
-/* ==============================
-   TAKIMLAR
-============================== */
-
-.match{
-    position:relative;
-    z-index:2;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    text-align:center;
-}
-
-.team{
-    width:43%;
-}
-
-.team-name{
-    font-size:14px;
-    line-height:1.25;
-    font-weight:950;
-}
-
-.gs{
-    color:#ffd000;
-}
-
-.role{
-    margin-top:6px;
-
-    color:#555;
-
-    font-size:8px;
-    font-weight:800;
-    letter-spacing:1.2px;
-}
-
-.vs{
-    width:14%;
-
-    color:#555;
-
-    font-size:10px;
-    font-weight:900;
-}
-
-
-/* ==============================
-   TAHMİN MOTORU
-============================== */
-
-.engine{
-    position:relative;
-    z-index:2;
-
-    margin-top:24px;
-
-    padding:30px 15px;
-
-    text-align:center;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,210,0,.055),
-            rgba(210,0,35,.075)
-        );
-
-    border:1px solid
-        rgba(255,255,255,.065);
-}
-
-.engine-icon{
-    width:60px;
-    height:60px;
-
-    margin:auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd000,
-            #cf002d
-        );
-
-    box-shadow:
-        0 0 35px
-        rgba(255,190,0,.16);
-
-    font-size:27px;
-
-    animation:
-        lionPulse 1.7s infinite;
-}
-
-@keyframes lionPulse{
-
-    0%,100%{
-        transform:scale(1);
-        box-shadow:
-            0 0 25px
-            rgba(255,190,0,.12);
-    }
-
-    50%{
-        transform:scale(1.06);
-        box-shadow:
-            0 0 42px
-            rgba(255,190,0,.25);
-    }
-}
-
-.engine h2{
-    margin-top:15px;
-
-    font-size:16px;
-    font-weight:950;
-}
-
-.engine p{
-    margin-top:8px;
-
-    color:#777;
-
-    font-size:10px;
-    line-height:1.55;
-}
-
-.loading{
-    margin-top:17px;
-
-    display:flex;
-    justify-content:center;
-    gap:5px;
-}
-
-.loading i{
-    width:5px;
-    height:5px;
-
-    border-radius:50%;
-
-    background:#ffd000;
-
-    animation:
-        loading 1s infinite;
-}
-
-.loading i:nth-child(2){
-    animation-delay:.15s;
-}
-
-.loading i:nth-child(3){
-    animation-delay:.30s;
-}
-
-@keyframes loading{
-
-    0%,100%{
-        opacity:.15;
-        transform:scale(.7);
-    }
-
-    50%{
-        opacity:1;
-        transform:scale(1.3);
-    }
-}
-
-
-/* ==============================
-   İSİM
-============================== */
-
-.name{
-    position:relative;
-    z-index:2;
-
-    margin-top:13px;
-}
-
-.name input{
-    width:100%;
-    height:48px;
-
-    padding:0 15px;
-
-    outline:none;
-
-    border-radius:14px;
-
-    border:1px solid
-        rgba(255,255,255,.08);
-
-    background:#0d0d0d;
-
-    color:#fff;
-
-    text-align:center;
-
-    font-size:12px;
-}
-
-.name input:focus{
-    border-color:
-        rgba(255,205,0,.38);
-
-    box-shadow:
-        0 0 20px
-        rgba(255,205,0,.05);
-}
-
-.name input::placeholder{
-    color:#555;
-}
-
-
-/* ==============================
-   BUTONLAR
-============================== */
-
-.buttons{
-    position:relative;
-    z-index:2;
-}
-
-button{
-    font-family:inherit;
-}
-
-.start{
-    width:100%;
-    height:56px;
-
-    margin-top:11px;
-
-    border:0;
-    border-radius:16px;
-
-    cursor:pointer;
-
-    color:#050505;
-
-    font-size:12px;
-    font-weight:950;
-
-    background:
-        linear-gradient(
-            100deg,
-            #ffd900,
-            #ffad00
-        );
-
-    box-shadow:
-        0 10px 30px
-        rgba(255,190,0,.10);
-}
-
-.start:active{
-    transform:scale(.98);
-}
-
-.stop{
-    width:100%;
-    height:46px;
-
-    margin-top:9px;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    color:#aaa;
-
-    font-size:10px;
-    font-weight:900;
-
-    background:#101010;
-
-    border:1px solid
-        rgba(255,255,255,.08);
-}
-
-.stop:disabled{
-    opacity:.35;
-    cursor:not-allowed;
-}
-
-
-/* ==============================
-   FOOTER
-============================== */
-
-.footer{
-    margin-top:16px;
-
-    text-align:center;
-
-    color:#414141;
-
-    font-size:8px;
-
-    letter-spacing:1px;
-}
-
-
-/* =========================================================
-   POPUP
-========================================================= */
-
-.overlay{
-    position:fixed;
-
-    inset:0;
-
-    z-index:99999;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:16px;
-
-    background:
-        rgba(0,0,0,.91);
-
-    backdrop-filter:
-        blur(17px);
-}
-
-.overlay.open{
-    display:flex;
-
-    animation:
-        overlayIn .22s ease;
-}
-
-@keyframes overlayIn{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
-}
-
-
-.popup{
-    position:relative;
-
-    width:100%;
-    max-width:410px;
-
-    overflow:hidden;
-
-    border-radius:30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #191919,
-            #080808
-        );
-
-    border:1px solid
-        rgba(255,205,0,.30);
-
-    box-shadow:
-        0 35px 120px
-        rgba(0,0,0,.98),
-
-        0 0 70px
-        rgba(255,0,40,.11);
-
-    animation:
-        popupIn .34s
-        cubic-bezier(.2,.85,.2,1);
-}
-
-@keyframes popupIn{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(35px)
-            scale(.88);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-
-/* ÜST RENK */
-
-.popup-line{
-    width:100%;
-    height:5px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffd000,
-            #d50036,
-            #ffd000
-        );
-}
-
-
-/* KAPAT */
-
-.close{
-    position:absolute;
-
-    top:15px;
-    right:15px;
-
-    width:34px;
-    height:34px;
-
-    border:0;
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.07);
-
-    color:#aaa;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-    z-index:10;
-}
-
-
-/* POPUP İÇ */
-
-.popup-content{
-    padding:
-        28px 21px 21px;
-
-    text-align:center;
-}
-
-.result-label{
-    color:#666;
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:2.3px;
-}
-
-.personal{
-    margin-top:7px;
-
-    color:#ffd000;
-
-    font-size:11px;
-
-    font-weight:900;
-}
-
-
-/* TAKIM ADLARI */
-
-.result-teams{
-    margin-top:22px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:11px;
-}
-
-.result-team{
-    font-size:11px;
-    font-weight:950;
-}
-
-.result-team.gs{
-    color:#ffd000;
-}
-
-.result-vs{
-    color:#555;
-
-    font-size:8px;
-    font-weight:900;
-}
-
-
-/* SKOR */
-
-.final-score{
-    margin-top:13px;
-
-    font-size:67px;
-
-    line-height:1;
-
-    font-weight:1000;
-
-    letter-spacing:3px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffd400,
-            #ffb000,
-            #ff3150
-        );
-
-    -webkit-background-clip:text;
-    background-clip:text;
-
-    color:transparent;
-
-    text-shadow:
-        0 0 35px
-        rgba(255,180,0,.08);
-}
-
-.score-label{
-    margin-top:7px;
-
-    color:#555;
-
-    font-size:8px;
-
-    letter-spacing:1.6px;
-}
-
-
-/* ==============================
-   YORUM
-============================== */
-
-.joke{
-    margin-top:19px;
-
-    padding:17px 14px;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,210,0,.07),
-            rgba(210,0,35,.10)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.07);
-}
-
-.joke-title{
-    color:#ffd000;
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:1.6px;
-}
-
-.joke-text{
-    margin-top:9px;
-
-    color:#eee;
-
-    font-size:13px;
-
-    line-height:1.5;
-
-    font-weight:850;
-}
-
-
-/* ==============================
-   PAYLAŞ
-============================== */
-
-.share-label{
-    margin-top:19px;
-
-    color:#555;
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:1.5px;
-}
-
-.share-grid{
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:9px;
-
-    margin-top:9px;
-}
-
-.share{
-    height:50px;
-
-    border:0;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    font-size:9px;
-
-    font-weight:950;
-}
-
-.image-share{
-    color:#050505;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd900,
-            #ffad00
-        );
-}
-
-.telegram-share{
-    color:#fff;
-
-    background:#229ed9;
-}
-
-
-/* TEKRAR */
-
-.again{
-    width:100%;
-
-    height:45px;
-
-    margin-top:9px;
-
-    border-radius:14px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.07);
-
-    color:#888;
-
-    background:#101010;
-
-    cursor:pointer;
-
-    font-size:10px;
-
-    font-weight:900;
-}
-
-.disclaimer{
-    margin-top:12px;
-
-    color:#444;
-
-    font-size:7px;
-
-    line-height:1.4;
-}
-
-
-/* CANVAS */
-
-#shareCanvas{
-    position:fixed;
-
-    left:-100000px;
-    top:-100000px;
-
-    width:1080px;
-    height:1350px;
-}
-</style></head><body><div class="container"><div class="header">
-
-    <div class="header-small">
-        MAÇ GECESİ
-    </div>
-
-    <h1>
-        <span>GALATASARAY</span> × KOCAELİSPOR
-    </h1>
-
-    <p>
-        İçinden gelen skoru seç.
-    </p>
-
-</div>
-
-
-<div class="card">
-
-    <div class="match">
-
-        <div class="team">
-
-            <div class="team-name gs">
-                GALATASARAY
-            </div>
-
-            <div class="role">
-                EV SAHİBİ
-            </div>
-
-        </div>
-
-
-        <div class="vs">
-            VS
-        </div>
-
-
-        <div class="team">
-
-            <div class="team-name">
-                KOCAELİSPOR
-            </div>
-
-            <div class="role">
-                DEPLASMAN
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="engine">
-
-        <div class="engine-icon">
-            🦁
-        </div>
-
-        <h2>
-            Skorunu keşfet
-        </h2>
-
-        <p>
-            Tahmin motoru hazır.<br>
-            Skor sonucunu görmek için durdur.
-        </p>
-
-        <div class="loading">
-            <i></i>
-            <i></i>
-            <i></i>
-        </div>
-
-    </div>
-
-
-    <div class="name">
-
-        <input
-            id="userName"
-            maxlength="24"
-            autocomplete="off"
-            placeholder="Adını yaz • Tahminin sana özel olsun">
-
-    </div>
-
-
-    <div class="buttons">
-
-        <button
-            class="start"
-            id="startBtn"
-            onclick="startPrediction()">
-
-            ⚡ SKOR TAHMİNİNİ BAŞLAT
-
-        </button>
-
-
-        <button
-            class="stop"
-            id="stopBtn"
-            onclick="stopPrediction()"
-            disabled>
-
-            ⏸ TAHMİNİ DURDUR
-
-        </button>
-
-    </div>
-
-</div>
-
-
-<div class="footer">
-    GALATASARAY • SKOR TAHMİNİ
-</div>
-
-</div><!-- =====================================================
-     SONUÇ POPUP
-====================================================== --><div
-    class="overlay"
-    id="overlay"><div class="popup">
-
-    <div class="popup-line"></div>
-
-
-    <button
-        class="close"
-        onclick="closePopup()">
-
-        ×
-
-    </button>
-
-
-    <div class="popup-content">
-
-        <div class="result-label">
-            TAHMİNİN KİLİTLENDİ
-        </div>
-
-
-        <div
-            class="personal"
-            id="personal">
-
-            Bu tahmin sana özel.
-
-        </div>
-
-
-        <div class="result-teams">
-
-            <div class="result-team gs">
-                GALATASARAY
-            </div>
-
-            <div class="result-vs">
-                VS
-            </div>
-
-            <div class="result-team">
-                KOCAELİSPOR
-            </div>
-
-        </div>
-
-
-        <!-- SKOR BURADA KESİN GÖRÜNÜR -->
-
-        <div
-            class="final-score"
-            id="finalScore">
-
-            0 - 0
-
-        </div>
-
-
-        <div class="score-label">
-            TAHMİN EDİLEN SKOR
-        </div>
-
-
-        <div class="joke">
-
-            <div class="joke-title">
-                🦁 CİMBOM'DAN SANA MESAJ
-            </div>
-
-            <div
-                class="joke-text"
-                id="jokeText">
-
-                ŞAMPİYON OLACAĞIZ HAYDİ HAYDİ!!!
-
-            </div>
-
-        </div>
-
-
-        <div class="share-label">
-            TAHMİNİNİ PAYLAŞ
-        </div>
-
-
-        <div class="share-grid">
-
-            <button
-                class="share image-share"
-                onclick="shareImage()">
-
-                🖼 GÖRSEL OLARAK PAYLAŞ
-
-            </button>
-
-
-            <button
-                class="share telegram-share"
-                onclick="shareTelegram()">
-
-                ✈️ TELEGRAM'DA PAYLAŞ
-
-            </button>
-
-        </div>
-
-
-        <button
-            class="again"
-            onclick="newPrediction()">
-
-            ↻ YENİDEN TAHMİN ET
-
-        </button>
-
-
-        <div class="disclaimer">
-            Eğlence amaçlı skor simülasyonudur.
-            Gerçek maç sonucunu garanti etmez.
-        </div>
-
-    </div>
-
-</div>
-
-</div><canvas
-id="shareCanvas"
-width="1080"
-height="1350">
-</canvas>
-
-<script>
-
-/* =====================================================
-   SKOR HAVUZU
-===================================================== */
-
-const scores = [
-
-    "1 - 0",
-    "1 - 0",
-    "1 - 0",
-
-    "2 - 0",
-    "2 - 0",
-    "2 - 0",
-    "2 - 0",
-
-    "2 - 1",
-    "2 - 1",
-    "2 - 1",
-    "2 - 1",
-
-    "3 - 0",
-    "3 - 0",
-
-    "3 - 1",
-    "3 - 1",
-
-    "3 - 2",
-
-    "4 - 0",
-    "4 - 1",
-
-    "0 - 0",
-
-    "1 - 1",
-    "1 - 1",
-
-    "2 - 2",
-
-    "0 - 1",
-
-    "1 - 2",
-    "1 - 2",
-
-    "0 - 2"
-];
-
-
-/* =====================================================
-   MESAJLAR
-===================================================== */
-
-const normalWin = [
-
-    "🏆 ŞAMPİYON OLACAĞIZ HAYDİ HAYDİ!!!",
-
-    "🦁 CİMBOM SAHNEDE! GERİSİ TEFERRUAT!",
-
-    "🔥 RAMS PARK'TA ASLANLAR KÜKREDİ!",
-
-    "🟡🔴 3 PUAN CEBE, ÇAYLAR SÖYLENEBİLİR!",
-
-    "😂 FENERBAHÇE KÖPEĞİNE ŞAMPİYON CİMBOM YAZDIRACAĞIZ!",
-
-    "🏆 HEDEF ŞAMPİYONLUK! HAYDİ GALATASARAY!",
-
-    "🦁 ASLAN YÜRÜDÜ, LİGİN GERİSİ DÜŞÜNSÜN!",
-
-    "🔥 CİMBOM DURMUYOR, BİZİ KİM TUTACAK?",
-
-    "😂 FENERLİLER PUAN TABLOSUNA BAKMASIN!",
-
-    "🟡🔴 BUGÜN CİMBOM GÜNÜ!",
-
-    "🏆 BİR GALİBİYET DAHA, ŞAMPİYONLUK DAHA YAKIN!",
-
-    "🦁 ASLANLAR ÜÇLÜ ÇEKTİRİYOR!"
-];
-
-
-const bigWin = [
-
-    "🔥 FARK AÇILDI! ŞAMPİYON CİMBOM GELİYOR!",
-
-    "😂 FENERLİLER PUAN TABLOSUNU KAPATSIN!",
-
-    "🏆 BU SKOR ŞAMPİYONLUK PROVASINA GİRDİ!",
-
-    "🦁 ASLAN BUGÜN DİŞLERİNİ GÖSTERDİ!",
-
-    "🔥 CİMBOM VİTESİ 5'E TAKTI!",
-
-    "😂 BU SKORDAN SONRA PUAN TABLOSUNA BAKMAK CESARET İSTER!"
-];
-
-
-const draws = [
-
-    "😏 Daha bitmedi, Cimbom her zaman geri döner!",
-
-    "🦁 Aslan biraz uyudu, ikinci yarı uyandırırız!",
-
-    "😂 VAR'a bir kahve molası verelim hocam!",
-
-    "🟡🔴 Sakin olun, daha yolun başındayız!",
-
-    "🔥 Cimbom pes etmez!",
-
-    "😎 Bir puan cepte, sıra galibiyette!"
-];
-
-
-const losses = [
-
-    "😂 HOCAM BU SONUCU KİM YAZDI?",
-
-    "😳 BU SKORU SİSTEME FENERLİ Mİ GİRDİ?",
-
-    "😂 SİMÜLASYONU KAPATIN, YENİDEN AÇALIM!",
-
-    "🦁 ASLAN BUGÜN AVCI DEĞİL, MİSAFİR!"
-];
-
-
-/* =====================================================
-   DEĞİŞKENLER
-===================================================== */
-
-let timer = null;
-
-let running = false;
-
-let currentScore = null;
-
-let currentJoke = null;
-
-
-/* =====================================================
-   RANDOM SKOR
-===================================================== */
-
-function randomScore(){
-
-    return scores[
-        Math.floor(
-            Math.random() *
-            scores.length
-        )
-    ];
-
-}
-
-
-/* =====================================================
-   RANDOM MESAJ
-===================================================== */
-
-function randomFrom(array){
-
-    return array[
-        Math.floor(
-            Math.random() *
-            array.length
-        )
-    ];
-
-}
-
-
-/* =====================================================
-   SKORA GÖRE MESAJ
-===================================================== */
-
-function getJoke(score){
-
-    const clean =
-        score
-        .replace(/\s/g,"")
-        .split("-");
-
-    const gs =
-        Number(clean[0]);
-
-    const ko =
-        Number(clean[1]);
-
-
-    if(gs > ko){
-
-        if(
-            gs - ko >= 2
-        ){
-
-            return randomFrom(
-                bigWin
-            );
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Skor Tahmin - Galatasaray vs Barcelona</title>
+    <!-- Font & Icon Library -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- HTML2Canvas Library for Screenshot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #0f0f15;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 215, 0, 0.3);
+            --accent-gold: #ffd700;
+            --gs-red: #a90429;
+            --barca-blue: #004d98;
+            --text-color: #ffffff;
         }
 
-        return randomFrom(
-            normalWin
-        );
-
-    }
-
-
-    if(gs === ko){
-
-        return randomFrom(
-            draws
-        );
-
-    }
-
-
-    return randomFrom(
-        losses
-    );
-
-}
-
-
-/* =====================================================
-   BAŞLAT
-===================================================== */
-
-function startPrediction(){
-
-    /*
-    Zaten çalışıyorsa ikinci timer açma.
-    */
-
-    if(running){
-
-        return;
-
-    }
-
-
-    running = true;
-
-    /*
-    Önceki sonucu temizle.
-    */
-
-    currentScore = null;
-    currentJoke = null;
-
-
-    const startBtn =
-        document.getElementById(
-            "startBtn"
-        );
-
-    const stopBtn =
-        document.getElementById(
-            "stopBtn"
-        );
-
-
-    startBtn.disabled = true;
-
-    stopBtn.disabled = false;
-
-
-    /*
-    ÇOK HIZLI RANDOM MOTOR
-    */
-
-    timer = setInterval(
-
-        function(){
-
-            /*
-            Kullanıcı bunu
-            görmüyor.
-            */
-
-            currentScore =
-                randomScore();
-
-        },
-
-        38
-
-    );
-
-}
-
-
-/* =====================================================
-   DURDUR
-===================================================== */
-
-function stopPrediction(){
-
-    /*
-    Çalışmıyorsa hiçbir şey yapma.
-    */
-
-    if(!running){
-
-        return;
-
-    }
-
-
-    running = false;
-
-
-    /*
-    TIMER'I KES.
-    */
-
-    if(timer !== null){
-
-        clearInterval(timer);
-
-        timer = null;
-
-    }
-
-
-    const startBtn =
-        document.getElementById(
-            "startBtn"
-        );
-
-    const stopBtn =
-        document.getElementById(
-            "stopBtn"
-        );
-
-
-    startBtn.disabled = false;
-
-    stopBtn.disabled = true;
-
-
-    /*
-    Güvenlik:
-    Herhangi bir nedenle skor yoksa
-    son bir random skor üret.
-    */
-
-    if(!currentScore){
-
-        currentScore =
-            randomScore();
-
-    }
-
-
-    /*
-    MESAJI SADECE SONUÇ
-    KİLİTLENDİKTEN SONRA ÜRET.
-    */
-
-    currentJoke =
-        getJoke(currentScore);
-
-
-    /*
-    SKORU POPUP'A YAZ.
-    */
-
-    const scoreElement =
-        document.getElementById(
-            "finalScore"
-        );
-
-    scoreElement.textContent =
-        currentScore;
-
-
-    /*
-    YORUMU YAZ.
-    */
-
-    document.getElementById(
-        "jokeText"
-    ).textContent =
-        currentJoke;
-
-
-    /*
-    KULLANICI ADI.
-    */
-
-    const name =
-        document.getElementById(
-            "userName"
-        ).value.trim();
-
-
-    document.getElementById(
-        "personal"
-    ).textContent = name
-
-        ? name +
-          ", bu tahmin senin için."
-
-        : "Bu tahmin senin için.";
-
-
-    /*
-    POPUP'I AÇ.
-    */
-
-    document
-        .getElementById("overlay")
-        .classList.add("open");
-
-
-    /*
-    Skorun görünürlüğünü garanti et.
-    */
-
-    scoreElement.style.display =
-        "block";
-
-}
-
-
-/* =====================================================
-   POPUP KAPAT
-===================================================== */
-
-function closePopup(){
-
-    document
-        .getElementById("overlay")
-        .classList.remove("open");
-
-}
-
-
-/* =====================================================
-   YENİ TAHMİN
-===================================================== */
-
-function newPrediction(){
-
-    closePopup();
-
-    /*
-    Küçük gecikme:
-    popup kapanış animasyonu ile
-    yeni motor birbirine girmez.
-    */
-
-    setTimeout(
-
-        function(){
-
-            startPrediction();
-
-        },
-
-        120
-
-    );
-
-}
-
-
-/* =====================================================
-   TELEGRAM
-===================================================== */
-
-function shareTelegram(){
-
-    if(!currentScore){
-
-        return;
-
-    }
-
-
-    const name =
-        document.getElementById(
-            "userName"
-        ).value.trim();
-
-
-    const gsScore =
-        currentScore
-        .split("-")[0]
-        .trim();
-
-
-    const koScore =
-        currentScore
-        .split("-")[1]
-        .trim();
-
-
-    const who = name
-
-        ? name + "'ın tahmini:"
-
-        : "Benim tahminim:";
-
-
-    const text =
-`🟡🔴 GALATASARAY × KOCAELİSPOR
-
-${who}
-
-⚽ GALATASARAY ${gsScore} - ${koScore} KOCAELİSPOR
-
-🦁 ${currentJoke}
-
-#Galatasaray #Kocaelispor`;
-
-
-    const telegram =
-        "https://t.me/share/url" +
-
-        "?url=" +
-        encodeURIComponent(
-            location.href
-        ) +
-
-        "&text=" +
-        encodeURIComponent(
-            text
-        );
-
-
-    window.open(
-        telegram,
-        "_blank"
-    );
-
-}
-
-
-/* =====================================================
-   GÖRSEL PAYLAŞ
-===================================================== */
-
-async function shareImage(){
-
-    if(!currentScore){
-
-        return;
-
-    }
-
-
-    const canvas =
-        document.getElementById(
-            "shareCanvas"
-        );
-
-    const ctx =
-        canvas.getContext("2d");
-
-
-    const W = 1080;
-    const H = 1350;
-
-
-    /*
-    ARKA PLAN
-    */
-
-    ctx.clearRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-
-    const background =
-        ctx.createLinearGradient(
-            0,
-            0,
-            W,
-            H
-        );
-
-    background.addColorStop(
-        0,
-        "#090909"
-    );
-
-    background.addColorStop(
-        .5,
-        "#15110a"
-    );
-
-    background.addColorStop(
-        1,
-        "#080808"
-    );
-
-
-    ctx.fillStyle =
-        background;
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-
-    /*
-    ÜST RENK
-    */
-
-    const line =
-        ctx.createLinearGradient(
-            0,
-            0,
-            W,
-            0
-        );
-
-    line.addColorStop(
-        0,
-        "#ffd000"
-    );
-
-    line.addColorStop(
-        .5,
-        "#d50036"
-    );
-
-    line.addColorStop(
-        1,
-        "#ffd000"
-    );
-
-
-    ctx.fillStyle = line;
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        12
-    );
-
-
-    /*
-    IŞIK
-    */
-
-    const glow =
-        ctx.createRadialGradient(
-            W/2,
-            230,
-            10,
-            W/2,
-            230,
-            520
-        );
-
-    glow.addColorStop(
-        0,
-        "rgba(255,210,0,.18)"
-    );
-
-    glow.addColorStop(
-        1,
-        "rgba(255,210,0,0)"
-    );
-
-
-    ctx.fillStyle =
-        glow;
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        650
-    );
-
-
-    ctx.textAlign =
-        "center";
-
-
-    /*
-    BAŞLIK
-    */
-
-    ctx.fillStyle =
-        "#666";
-
-    ctx.font =
-        "800 25px Arial";
-
-    ctx.fillText(
-        "MAÇ GECESİ",
-        W/2,
-        110
-    );
-
-
-    ctx.fillStyle =
-        "#ffd000";
-
-    ctx.font =
-        "900 49px Arial";
-
-    ctx.fillText(
-        "GALATASARAY",
-        W/2,
-        180
-    );
-
-
-    ctx.fillStyle =
-        "#555";
-
-    ctx.font =
-        "900 25px Arial";
-
-    ctx.fillText(
-        "×",
-        W/2,
-        225
-    );
-
-
-    ctx.fillStyle =
-        "#fff";
-
-    ctx.font =
-        "900 42px Arial";
-
-    ctx.fillText(
-        "KOCAELİSPOR",
-        W/2,
-        285
-    );
-
-
-    /*
-    SKOR KARTI
-    */
-
-    roundRect(
-        ctx,
-        80,
-        360,
-        920,
-        390,
-        35
-    );
-
-
-    ctx.fillStyle =
-        "#101010";
-
-    ctx.fill();
-
-
-    ctx.strokeStyle =
-        "rgba(255,205,0,.24)";
-
-    ctx.lineWidth = 2;
-
-    ctx.stroke();
-
-
-    ctx.fillStyle =
-        "#666";
-
-    ctx.font =
-        "800 22px Arial";
-
-    ctx.fillText(
-        "TAHMİN EDİLEN SKOR",
-        W/2,
-        430
-    );
-
-
-    /*
-    SKOR
-    */
-
-    const scoreGradient =
-        ctx.createLinearGradient(
-            300,
-            0,
-            780,
-            0
-        );
-
-    scoreGradient.addColorStop(
-        0,
-        "#ffd400"
-    );
-
-    scoreGradient.addColorStop(
-        1,
-        "#ff3150"
-    );
-
-
-    ctx.fillStyle =
-        scoreGradient;
-
-    ctx.font =
-        "1000 120px Arial";
-
-    ctx.fillText(
-        currentScore,
-        W/2,
-        570
-    );
-
-
-    /*
-    İSİM
-    */
-
-    const name =
-        document.getElementById(
-            "userName"
-        ).value.trim();
-
-
-    ctx.fillStyle =
-        "#aaa";
-
-    ctx.font =
-        "700 25px Arial";
-
-    ctx.fillText(
-
-        name
-        ? name + "'ın tahmini"
-        : "Benim tahminim",
-
-        W/2,
-        660
-
-    );
-
-
-    /*
-    YORUM
-    */
-
-    ctx.fillStyle =
-        "#ffd000";
-
-    ctx.font =
-        "900 22px Arial";
-
-    ctx.fillText(
-        "🦁 TARAFTAR YORUMU",
-        W/2,
-        865
-    );
-
-
-    ctx.fillStyle =
-        "#fff";
-
-    ctx.font =
-        "800 30px Arial";
-
-
-    drawWrappedText(
-        ctx,
-        currentJoke,
-        W/2,
-        935,
-        790,
-        43
-    );
-
-
-    /*
-    ALT
-    */
-
-    ctx.fillStyle =
-        "#555";
-
-    ctx.font =
-        "800 19px Arial";
-
-    ctx.fillText(
-        "GALATASARAY • GSHD",
-        W/2,
-        1250
-    );
-
-
-    /*
-    PNG OLUŞTUR
-    */
-
-    canvas.toBlob(
-
-        async function(blob){
-
-            if(!blob){
-
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f15 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .vip-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 30px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .vip-badge {
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            color: #000;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #fff, var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 25px;
+        }
+
+        .match-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .team {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            margin-bottom: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .gs-logo { background: linear-gradient(135deg, #a90429, #fdb913); }
+        .barca-logo { background: linear-gradient(135deg, #004d98, #a50044); }
+
+        .team-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .score-display {
+            width: 75px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 12px;
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+            transition: border-color 0.3s;
+        }
+
+        .score-display.spinning {
+            color: #888;
+            animation: pulseGlow 0.2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { border-color: rgba(255, 215, 0, 0.2); }
+            to { border-color: var(--accent-gold); }
+        }
+
+        .vs {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            padding: 0 10px;
+        }
+
+        .comment-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--accent-gold);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            min-height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #ddd;
+            line-height: 1.4;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            min-width: 140px;
+        }
+
+        .btn-predict {
+            background: linear-gradient(45deg, #00C853, #64DD17);
+            color: #000;
+            font-weight: 800;
+        }
+
+        .btn-predict:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+        }
+
+        .btn-telegram:hover {
+            background: #006699;
+            transform: translateY(-2px);
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            color: #000;
+        }
+
+        .btn-download:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="vip-card" id="captureCard">
+        <div class="vip-badge">VIP TAHMİN</div>
+        
+        <div class="header">
+            <h1>DEV EŞLEŞME</h1>
+            <p>Otomatik Skor Çarkını Durdur, Kaderini Belirle!</p>
+        </div>
+
+        <div class="match-container">
+            <!-- GALATASARAY -->
+            <div class="team">
+                <div class="team-logo gs-logo">GS</div>
+                <div class="team-name">Galatasaray</div>
+                <div id="gsScore" class="score-display">2</div>
+            </div>
+
+            <div class="vs">VS</div>
+
+            <!-- BARCELONA -->
+            <div class="team">
+                <div class="team-logo barca-logo">BAR</div>
+                <div class="team-name">Barcelona</div>
+                <div id="barcaScore" class="score-display">1</div>
+            </div>
+        </div>
+
+        <!-- MİZAHİ YORUM ALANI -->
+        <div class="comment-box" id="commentText">
+            "Yorum bekleniyor..."
+        </div>
+
+        <!-- BUTONLAR -->
+        <div class="btn-group" data-html2canvas-ignore="true">
+            <button class="btn btn-predict" id="spinBtn" onclick="toggleSpin()">
+                <i class="fa-solid fa-dice"></i> Skorları Dönüştür / Durdur
+            </button>
+            <button class="btn btn-telegram" onclick="shareTelegram()">
+                <i class="fa-brands fa-telegram"></i> Telegram'da Paylaş
+            </button>
+            <button class="btn btn-download" onclick="downloadImage()">
+                <i class="fa-solid fa-camera"></i> Resim Olarak Kaydet
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // GALATASARAY GALİBİYETİ YORUMLARI
+        const gsComments = [
+            "RAMS Park'ta uzay takımı gelse söker atar! Aslan kükredi bir kere! 🦁",
+            "Camp Nou yetkilileri ne olduğunu anlamadan İstanbul uçak biletlerini kontrol ediyor...",
+            "Barcelona otobüsünü Florya kavşağında durdurup tebrik çiçeği verdiler!",
+            "Taktik maktik yok, bam bam bam! Tiki-taka buraya kadar!",
+            "İspanyollar paella yemeyi bıraktı, baklava siparişi veriyor!",
+            "Katalan basını şokta: 'İstanbul'da kaybolduk, pusulamız bozuldu!'",
+            "Osimhen ve Rafa Leao gol şov yaptı, Barcelona defansı tatile erken çıktı!",
+            "Boğaz'ın kırmızı-sarı suları Barcelona'yı yuttu!",
+            "Avrupa Fatihi genleri devreye girdi, Katalanlar şaşkın!",
+            "Katalonya'da hüzün hakim: 'Biz neye uğradık böyle?'"
+        ];
+
+        // BARCELONA GALİBİYETİ YORUMLARI
+        const barcaComments = [
+            "Tiki-taka İstanbul sahillerine kadar indi, bu skor can yakar...",
+            "Barça uzay futbolu oynadı, bizimkiler uzaydan gelen topu izledi.",
+            "Flick maçı izlerken kahvesini yudumladı, tıkır tıkır galibiyet.",
+            "Skor panosu bozulmadıysa Barcelona şov yapmış demektir...",
+            "İspanyol rüzgarı sert esti, kalecimizin eldivenleri buharlaştı!",
+            "Pas yüzdesi %98 olunca top bize hiç gelmedi desek yeridir...",
+            "Barcelona taktiği çözülemedi, UEFA araya girdi sanırım!",
+            "Katalanlar şovunu yaptı, İstanbul'dan 3 puanla döndü.",
+            "Işıklar kapandı, Barcelona geceyi aydınlattı...",
+            "Saha ortasında tiki-taka dersi verildi, ders ücreti skor panosunda!"
+        ];
+
+        // BERABERLİK YORUMLARI
+        const drawComments = [
+            "Dostluk kazandı ama iki tarafın da kalbi duruyordu! Harika bir maç!",
+            "Şampiyonlar Ligi kalitesinde bir beraberlik! Kimse üzülmedi.",
+            "Tiki-taka ile Bam-Bam-Bam çakıştı, nötr alan oluştu! 0x0 etki.",
+            "İki dev yenişemedi, rövanş maçı sinemalarda!",
+            "Ne Aslan pes etti ne de Katalanlar! Sonuç: Kardeşlik berabere.",
+            "90 dakika boyunca iki taraf da ne var ne yok sahaya döktü!",
+            "Her iki teknik direktör de maç sonu el sıkışıp helalleşti.",
+            "Direkler sallandı, kaleciler devleşti, maç berabere bitti!",
+            "İki takım da birer puanı cebine koydu, dostça ayrıldı.",
+            "Ne Katalunya güldü ne de İstanbul, tam bir taktik savaşı!"
+        ];
+
+        // ÇOK GOLLÜ MAÇ YORUMLARI (+7 Gol)
+        const crazyComments = [
+            "Bu skor halı sahada bile çıkmaz! FIFA oynasalar bu kadar gol olmazdı!",
+            "Defanslar maça gelmeyi unuttu sanırım, kaleciler istifasını verdi!",
+            "Tarihe geçecek bir tenis maçı skoru! Seyirciler ayakta alkışlıyor!",
+            "Hakem düdüğü çalmaktan yoruldu, basketbol skoru gibi maç!",
+            "Saha çizgisini çekmeyi unutmuşlar, her gelen şut gol oldu!"
+        ];
+
+        let isSpinning = false;
+        let spinInterval;
+        let currentGs = 2;
+        let currentBarca = 1;
+
+        function toggleSpin() {
+            const spinBtn = document.getElementById('spinBtn');
+            const gsBox = document.getElementById('gsScore');
+            const barcaBox = document.getElementById('barcaScore');
+            const commentBox = document.getElementById('commentText');
+
+            if (!isSpinning) {
+                isSpinning = true;
+                spinBtn.innerHTML = '<i class="fa-solid fa-hand"></i> Skoru Durdur!';
+                spinBtn.style.background = 'linear-gradient(45deg, #D50000, #FF1744)';
+                gsBox.classList.add('spinning');
+                barcaBox.classList.add('spinning');
+                commentBox.innerText = '"Top kapışılıyor, skorlar hızla değişiyor..."';
+
+                spinInterval = setInterval(() => {
+                    currentGs = Math.floor(Math.random() * 6); // 0-5 arası
+                    currentBarca = Math.floor(Math.random() * 6);
+                    gsBox.innerText = currentGs;
+                    barcaBox.innerText = currentBarca;
+                }, 80);
+            } else {
+                clearInterval(spinInterval);
+                isSpinning = false;
+                gsBox.classList.remove('spinning');
+                barcaBox.classList.remove('spinning');
+                spinBtn.innerHTML = '<i class="fa-solid fa-dice"></i> Tekrar Çevir';
+                spinBtn.style.background = 'linear-gradient(45deg, #00C853, #64DD17)';
+
+                updateComment(currentGs, currentBarca);
+            }
+        }
+
+        function updateComment(gs, barca) {
+            const commentBox = document.getElementById('commentText');
+            let comment = "";
+
+            if (gs + barca > 7) {
+                comment = crazyComments[Math.floor(Math.random() * crazyComments.length)];
+            } else if (gs > barca) {
+                comment = gsComments[Math.floor(Math.random() * gsComments.length)];
+            } else if (barca > gs) {
+                comment = barcaComments[Math.floor(Math.random() * barcaComments.length)];
+            } else {
+                comment = drawComments[Math.floor(Math.random() * drawComments.length)];
+            }
+
+            commentBox.innerText = `"${comment}"`;
+        }
+
+        function shareTelegram() {
+            if (isSpinning) {
+                alert("Önce skoru durdurmalısın!");
                 return;
-
             }
+            const comment = document.getElementById('commentText').innerText;
 
+            const text = `🔥 *VIP SKOR TAHMİNİ* 🔥\n\n🏆 *Galatasaray* ${currentGs} - ${currentBarca} *Barcelona*\n\n💬 *Analiz:* ${comment}\n\nSen de tahminini yap!`;
+            const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(text)}`;
+            
+            window.open(telegramUrl, '_blank');
+        }
 
-            const file =
-                new File(
-                    [blob],
-                    "galatasaray-tahmin.png",
-                    {
-                        type:"image/png"
-                    }
-                );
-
-
-            /*
-            TELEFON DESTEKLİYORSA
-            GERÇEK PAYLAŞIM MENÜSÜ.
-            */
-
-            if(
-                navigator.share &&
-                navigator.canShare &&
-                navigator.canShare({
-                    files:[file]
-                })
-            ){
-
-                try{
-
-                    await navigator.share({
-
-                        title:
-                        "Galatasaray Skor Tahmini",
-
-                        files:[file]
-
-                    });
-
-                    return;
-
-                }catch(error){
-
-                    /*
-                    Kullanıcı paylaşımı
-                    iptal ettiyse sessizce çık.
-                    */
-
-                    if(
-                        error &&
-                        error.name ===
-                        "AbortError"
-                    ){
-
-                        return;
-
-                    }
-
-                }
-
+        function downloadImage() {
+            if (isSpinning) {
+                alert("Önce skoru durdurmalısın!");
+                return;
             }
-
-
-            /*
-            Desteklenmiyorsa
-            görseli aç.
-            */
-
-            const imageURL =
-                URL.createObjectURL(
-                    blob
-                );
-
-
-            window.open(
-                imageURL,
-                "_blank"
-            );
-
-        },
-
-        "image/png"
-
-    );
-
-}
-
-
-/* =====================================================
-   CANVAS YUVARLAK KART
-===================================================== */
-
-function roundRect(
-    ctx,
-    x,
-    y,
-    width,
-    height,
-    radius
-){
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        x + radius,
-        y
-    );
-
-    ctx.lineTo(
-        x + width - radius,
-        y
-    );
-
-    ctx.quadraticCurveTo(
-        x + width,
-        y,
-        x + width,
-        y + radius
-    );
-
-    ctx.lineTo(
-        x + width,
-        y + height - radius
-    );
-
-    ctx.quadraticCurveTo(
-        x + width,
-        y + height,
-        x + width - radius,
-        y + height
-    );
-
-    ctx.lineTo(
-        x + radius,
-        y + height
-    );
-
-    ctx.quadraticCurveTo(
-        x,
-        y + height,
-        x,
-        y + height - radius
-    );
-
-    ctx.lineTo(
-        x,
-        y + radius
-    );
-
-    ctx.quadraticCurveTo(
-        x,
-        y,
-        x + radius,
-        y
-    );
-
-    ctx.closePath();
-
-}
-
-
-/* =====================================================
-   CANVAS YAZI SARMA
-===================================================== */
-
-function drawWrappedText(
-    ctx,
-    text,
-    x,
-    y,
-    maxWidth,
-    lineHeight
-){
-
-    const words =
-        text.split(" ");
-
-    let line = "";
-
-    for(
-        let i=0;
-        i<words.length;
-        i++
-    ){
-
-        const test =
-            line +
-            words[i] +
-            " ";
-
-        const width =
-            ctx.measureText(
-                test
-            ).width;
-
-
-        if(
-            width > maxWidth &&
-            i > 0
-        ){
-
-            ctx.fillText(
-                line,
-                x,
-                y
-            );
-
-            line =
-                words[i] + " ";
-
-            y += lineHeight;
-
-        }else{
-
-            line = test;
-
+            const card = document.getElementById('captureCard');
+            
+            html2canvas(card, {
+                backgroundColor: null,
+                scale: 2
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'GS-BARCA-VIP-Tahmin.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
         }
 
-    }
-
-
-    ctx.fillText(
-        line,
-        x,
-        y
-    );
-
-}
-
-
-/* =====================================================
-   ESC İLE POPUP KAPAT
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(
-            e.key === "Escape"
-        ){
-
-            closePopup();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   POPUP DIŞINA TIKLAMA
-===================================================== */
-
-document
-.getElementById("overlay")
-.addEventListener(
-    "click",
-    function(e){
-
-        if(
-            e.target === this
-        ){
-
-            closePopup();
-
-        }
-
-    }
-);
-
-</script></body>
+        window.onload = () => {
+            updateComment(currentGs, currentBarca);
+        };
+    </script>
+</body>
 </html>
