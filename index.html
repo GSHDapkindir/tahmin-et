@@ -12,11 +12,9 @@
     
     <style>
         :root {
-            --bg-color: #0f0f15;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --border-color: rgba(255, 215, 0, 0.3);
             --accent-gold: #ffd700;
             --gs-red: #a90429;
+            --gs-yellow: #fdb913;
             --barca-blue: #004d98;
             --text-color: #ffffff;
         }
@@ -29,7 +27,7 @@
         }
 
         body {
-            background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f15 100%);
+            background: radial-gradient(circle at center, #800016 0%, #3a0008 50%, #120003 100%);
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
@@ -39,15 +37,15 @@
         }
 
         .vip-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color);
+            background: rgba(30, 5, 10, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--gs-yellow);
             border-radius: 24px;
             padding: 30px;
             width: 100%;
             max-width: 550px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(253, 185, 19, 0.25);
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -55,31 +53,32 @@
 
         .vip-badge {
             position: absolute;
-            top: 15px;
+            top: 18px;
             right: -35px;
-            background: linear-gradient(45deg, #ffd700, #ffa500);
+            background: linear-gradient(45deg, var(--gs-yellow), var(--accent-gold));
             color: #000;
             padding: 5px 40px;
             transform: rotate(45deg);
             font-weight: 800;
             font-size: 0.75rem;
             letter-spacing: 2px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
         }
 
         .header h1 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            background: linear-gradient(45deg, #fff, var(--accent-gold));
+            background: linear-gradient(45deg, #fff, var(--gs-yellow));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
+            font-weight: 800;
         }
 
         .header p {
             font-size: 0.85rem;
-            color: #aaa;
+            color: #e0e0e0;
             margin-bottom: 25px;
         }
 
@@ -106,12 +105,12 @@
             align-items: center;
             font-weight: 800;
             font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             margin-bottom: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .gs-logo { background: linear-gradient(135deg, #a90429, #fdb913); }
+        .gs-logo { background: linear-gradient(135deg, var(--gs-red), var(--gs-yellow)); }
         .barca-logo { background: linear-gradient(135deg, #004d98, #a50044); }
 
         .team-name {
@@ -123,16 +122,16 @@
         .score-display {
             width: 75px;
             height: 60px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 215, 0, 0.4);
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--gs-yellow);
             border-radius: 12px;
-            color: var(--accent-gold);
+            color: var(--gs-yellow);
             font-size: 1.8rem;
             font-weight: 800;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
             transition: border-color 0.3s;
         }
 
@@ -142,36 +141,52 @@
         }
 
         @keyframes pulseGlow {
-            from { border-color: rgba(255, 215, 0, 0.2); }
-            to { border-color: var(--accent-gold); }
+            from { border-color: rgba(253, 185, 19, 0.3); }
+            to { border-color: var(--gs-yellow); }
         }
 
         .vs {
             font-size: 1.2rem;
             font-weight: 800;
-            color: var(--accent-gold);
+            color: var(--gs-yellow);
             padding: 0 10px;
         }
 
-        .comment-box {
-            background: rgba(0, 0, 0, 0.3);
-            border-left: 4px solid var(--accent-gold);
+        /* ANALİZ KUTUSU VE BAŞLIĞI */
+        .analysis-wrapper {
+            background: rgba(15, 2, 5, 0.5);
+            border: 1px solid rgba(253, 185, 19, 0.4);
+            border-radius: 12px;
             padding: 15px;
-            border-radius: 8px;
             margin-bottom: 25px;
-            min-height: 75px;
+            text-align: left;
+        }
+
+        .analysis-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--gs-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 6px;
+        }
+
+        .comment-box {
             font-style: italic;
             font-size: 0.9rem;
-            color: #ddd;
+            color: #f0f0f0;
             line-height: 1.4;
+            min-height: 45px;
+            display: flex;
+            align-items: center;
         }
 
         .btn-group {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
@@ -180,7 +195,7 @@
             padding: 12px;
             border: none;
             border-radius: 12px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -188,13 +203,12 @@
             gap: 8px;
             transition: all 0.3s ease;
             font-size: 0.85rem;
-            min-width: 140px;
+            min-width: 130px;
         }
 
         .btn-predict {
-            background: linear-gradient(45deg, #00C853, #64DD17);
+            background: linear-gradient(45deg, var(--gs-yellow), #ffa500);
             color: #000;
-            font-weight: 800;
         }
 
         .btn-predict:hover {
@@ -213,8 +227,8 @@
         }
 
         .btn-download {
-            background: linear-gradient(45deg, #ffd700, #ffa500);
-            color: #000;
+            background: linear-gradient(45deg, #2e7d32, #4caf50);
+            color: #fff;
         }
 
         .btn-download:hover {
@@ -226,11 +240,11 @@
 <body>
 
     <div class="vip-card" id="captureCard">
-        <div class="vip-badge">VIP TAHMİN</div>
+        <div class="vip-badge">GSHD TAHMİN</div>
         
         <div class="header">
             <h1>DEV EŞLEŞME</h1>
-            <p>Otomatik Skor Çarkını Durdur, Kaderini Belirle!</p>
+            <p>Galatasaray x Barcelona Tahmin Ekranı</p>
         </div>
 
         <div class="match-container">
@@ -251,21 +265,26 @@
             </div>
         </div>
 
-        <!-- MİZAHİ YORUM ALANI -->
-        <div class="comment-box" id="commentText">
-            "Yorum bekleniyor..."
+        <!-- MAÇ ANALİZİ VE MİZAHİ YORUM ALANI -->
+        <div class="analysis-wrapper">
+            <div class="analysis-title">
+                <i class="fa-solid fa-chart-line"></i> Maç Analizi
+            </div>
+            <div class="comment-box" id="commentText">
+                "Skoru belirleyin ve maçı analiz edin!"
+            </div>
         </div>
 
-        <!-- BUTONLAR -->
+        <!-- BUTONLAR (Görsel kaydedilirken gizlenir) -->
         <div class="btn-group" data-html2canvas-ignore="true">
             <button class="btn btn-predict" id="spinBtn" onclick="toggleSpin()">
-                <i class="fa-solid fa-dice"></i> Skorları Dönüştür / Durdur
+                <i class="fa-solid fa-dice"></i> Skoru Belirle
             </button>
             <button class="btn btn-telegram" onclick="shareTelegram()">
-                <i class="fa-brands fa-telegram"></i> Telegram'da Paylaş
+                <i class="fa-brands fa-telegram"></i> Paylaş
             </button>
             <button class="btn btn-download" onclick="downloadImage()">
-                <i class="fa-solid fa-camera"></i> Resim Olarak Kaydet
+                <i class="fa-solid fa-camera"></i> Kaydet
             </button>
         </div>
     </div>
@@ -279,7 +298,7 @@
             "Taktik maktik yok, bam bam bam! Tiki-taka buraya kadar!",
             "İspanyollar paella yemeyi bıraktı, baklava siparişi veriyor!",
             "Katalan basını şokta: 'İstanbul'da kaybolduk, pusulamız bozuldu!'",
-            "Osimhen ve Rafa Leao gol şov yaptı, Barcelona defansı tatile erken çıktı!",
+            "Osimhen ve Leao gol şov yaptı, Barcelona defansı tatile erken çıktı!",
             "Boğaz'ın kırmızı-sarı suları Barcelona'yı yuttu!",
             "Avrupa Fatihi genleri devreye girdi, Katalanlar şaşkın!",
             "Katalonya'da hüzün hakim: 'Biz neye uğradık böyle?'"
@@ -335,14 +354,15 @@
 
             if (!isSpinning) {
                 isSpinning = true;
-                spinBtn.innerHTML = '<i class="fa-solid fa-hand"></i> Skoru Durdur!';
+                spinBtn.innerHTML = '<i class="fa-solid fa-hand"></i> Skoru Kilitle!';
                 spinBtn.style.background = 'linear-gradient(45deg, #D50000, #FF1744)';
+                spinBtn.style.color = '#fff';
                 gsBox.classList.add('spinning');
                 barcaBox.classList.add('spinning');
-                commentBox.innerText = '"Top kapışılıyor, skorlar hızla değişiyor..."';
+                commentBox.innerText = '"Top kapışılıyor, maç analizi bekleniyor..."';
 
                 spinInterval = setInterval(() => {
-                    currentGs = Math.floor(Math.random() * 6); // 0-5 arası
+                    currentGs = Math.floor(Math.random() * 6);
                     currentBarca = Math.floor(Math.random() * 6);
                     gsBox.innerText = currentGs;
                     barcaBox.innerText = currentBarca;
@@ -352,8 +372,9 @@
                 isSpinning = false;
                 gsBox.classList.remove('spinning');
                 barcaBox.classList.remove('spinning');
-                spinBtn.innerHTML = '<i class="fa-solid fa-dice"></i> Tekrar Çevir';
-                spinBtn.style.background = 'linear-gradient(45deg, #00C853, #64DD17)';
+                spinBtn.innerHTML = '<i class="fa-solid fa-dice"></i> Skoru Belirle';
+                spinBtn.style.background = 'linear-gradient(45deg, var(--gs-yellow), #ffa500)';
+                spinBtn.style.color = '#000';
 
                 updateComment(currentGs, currentBarca);
             }
@@ -378,12 +399,12 @@
 
         function shareTelegram() {
             if (isSpinning) {
-                alert("Önce skoru durdurmalısın!");
+                alert("Önce skoru kilitlemelisiniz!");
                 return;
             }
             const comment = document.getElementById('commentText').innerText;
 
-            const text = `🔥 *VIP SKOR TAHMİNİ* 🔥\n\n🏆 *Galatasaray* ${currentGs} - ${currentBarca} *Barcelona*\n\n💬 *Analiz:* ${comment}\n\nSen de tahminini yap!`;
+            const text = `🔥 *GSHD SKOR TAHMİNİ* 🔥\n\n🏆 *Galatasaray* ${currentGs} - ${currentBarca} *Barcelona*\n\n💬 *Maç Analizi:* ${comment}\n\nSen de tahminini yap!`;
             const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(text)}`;
             
             window.open(telegramUrl, '_blank');
@@ -391,7 +412,7 @@
 
         function downloadImage() {
             if (isSpinning) {
-                alert("Önce skoru durdurmalısın!");
+                alert("Önce skoru kilitlemelisiniz!");
                 return;
             }
             const card = document.getElementById('captureCard');
