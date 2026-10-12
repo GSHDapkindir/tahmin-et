@@ -26,6 +26,7 @@
         }
 
         body {
+            background: #2a0005;
             background: radial-gradient(circle at center, #600010 0%, #2a0005 60%, #0d0002 100%);
             color: var(--text-color);
             min-height: 100vh;
@@ -35,16 +36,16 @@
             padding: 20px;
         }
 
+        /* html2canvas için sağlam canlı renkler */
         .vip-card {
-            background: rgba(25, 3, 7, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: #220208;
+            background: linear-gradient(145deg, #2d020a 0%, #120004 100%);
             border: 2px solid var(--gs-yellow);
             border-radius: 24px;
             padding: 30px;
             width: 100%;
             max-width: 500px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(253, 185, 19, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(253, 185, 19, 0.3);
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -54,7 +55,7 @@
             position: absolute;
             top: 18px;
             right: -35px;
-            background: linear-gradient(45deg, var(--gs-yellow), var(--accent-gold));
+            background: var(--gs-yellow);
             color: #000;
             padding: 5px 40px;
             transform: rotate(45deg);
@@ -68,16 +69,14 @@
             font-size: 1.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            background: linear-gradient(45deg, #fff, var(--gs-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--gs-yellow);
             margin-bottom: 5px;
             font-weight: 800;
         }
 
         .header p {
             font-size: 0.85rem;
-            color: #ccc;
+            color: #dddddd;
             margin-bottom: 25px;
         }
 
@@ -104,7 +103,7 @@
             align-items: center;
             font-weight: 800;
             font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
             margin-bottom: 10px;
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
@@ -116,13 +115,13 @@
             font-weight: 600;
             font-size: 0.95rem;
             margin-bottom: 10px;
+            color: #ffffff;
         }
 
-        /* SARI - KIRMIZI SPINNER KUTULARI */
         .score-display {
             width: 75px;
             height: 60px;
-            background: rgba(0, 0, 0, 0.7);
+            background: #000000;
             border: 2px solid var(--gs-yellow);
             border-radius: 12px;
             color: var(--gs-yellow);
@@ -131,7 +130,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
             transition: all 0.3s ease;
         }
 
@@ -154,10 +152,9 @@
             padding: 0 10px;
         }
 
-        /* MAÇ ANALİZİ KUTUSU */
         .analysis-wrapper {
-            background: rgba(10, 1, 3, 0.6);
-            border: 1px solid rgba(253, 185, 19, 0.4);
+            background: #0a0103;
+            border: 1px solid var(--gs-yellow);
             border-radius: 12px;
             padding: 15px;
             margin-bottom: 25px;
@@ -179,7 +176,7 @@
         .comment-box {
             font-style: italic;
             font-size: 0.9rem;
-            color: #f0f0f0;
+            color: #ffffff;
             line-height: 1.4;
             min-height: 50px;
             display: flex;
@@ -209,7 +206,7 @@
         }
 
         .btn-predict {
-            background: linear-gradient(45deg, var(--gs-yellow), #ffa500);
+            background: var(--gs-yellow);
             color: #000;
         }
 
@@ -229,7 +226,7 @@
         }
 
         .btn-download {
-            background: linear-gradient(45deg, #2e7d32, #4caf50);
+            background: #2e7d32;
             color: #fff;
         }
 
@@ -277,7 +274,7 @@
             </div>
         </div>
 
-        <!-- BUTONLAR (Görsel kaydedilirken/paylaşılırken görünmez) -->
+        <!-- BUTONLAR (Görselde görünmez) -->
         <div class="btn-group" data-html2canvas-ignore="true">
             <button class="btn btn-predict" id="spinBtn" onclick="toggleSpin()">
                 <i class="fa-solid fa-dice"></i> Skoru Belirle
@@ -292,15 +289,14 @@
     </div>
 
     <script>
-        // GALATASARAY GALİBİYETİ YORUMLARI
         const gsComments = [
             "RAMS Park'ta uzay takımı gelse söker atar! Aslan kükredi bir kere! 🦁",
-            "Camp Nou yetkilileri ne olduğunu anlamadan İstanbul uçak biletlerini kontrol ediyor...",
+            "Barcelona yetkilileri ne olduğunu anlamadan İspanya uçak biletlerini kontrol ediyor...",
             "Barcelona otobüsünü Florya kavşağında durdurup tebrik çiçeği verdiler!",
             "Taktik maktik yok, bam bam bam! Tiki-taka buraya kadar!",
             "İspanyollar paella yemeyi bıraktı, baklava siparişi veriyor!",
             "Katalan basını şokta: 'İstanbul'da kaybolduk, pusulamız bozuldu!'",
-            "Osimhen gol şov yaptı, Barcelona defansı tatile erken çıktı!",
+            "Osimhen ve Icardi gol şov yaptı, Barcelona defansı tatile erken çıktı!",
             "Boğaz'ın kırmızı-sarı suları Barcelona'yı yuttu!",
             "Avrupa Fatihi genleri devreye girdi, Katalanlar şaşkın!",
             "Boğaz kıyısında samba vakti! Barcelona defansı ayakta uyudu.",
@@ -308,11 +304,10 @@
             "Bu maçı izleyen uzaylılar futbolun sarı-kırmızı oynandığına karar verdi!"
         ];
 
-        // BARCELONA GALİBİYETİ YORUMLARI
         const barcaComments = [
             "Tiki-taka İstanbul sahillerine kadar indi, bu skor can yakar...",
             "Barça uzay futbolu oynadı, bizimkiler uzaydan gelen topu izledi.",
-            "Xavi ve Flick maçı izlerken kahvesini yudumladı, tıkır tıkır galibiyet.",
+            "Flick maçı izlerken kahvesini yudumladı, tıkır tıkır galibiyet.",
             "Skor panosu bozulmadıysa Barcelona şov yapmış demektir...",
             "İspanyol rüzgarı sert esti, kalecimizin eldivenleri buharlaştı!",
             "Pas yüzdesi %98 olunca top bize hiç gelmedi desek yeridir...",
@@ -322,7 +317,6 @@
             "Pas trafiğinden bizim oyuncuların başı döndü, çimlere uzandılar."
         ];
 
-        // BERABERLİK YORUMLARI
         const drawComments = [
             "Dostluk kazandı ama iki tarafın da kalbi duruyordu! Harika bir maç!",
             "Şampiyonlar Ligi kalitesinde bir beraberlik! Kimse üzülmedi.",
@@ -334,7 +328,6 @@
             "Maç bitti ama heyecandan kimse tribünü terk edemiyor!"
         ];
 
-        // ÇOK GOLLÜ MAÇ YORUMLARI (+7 Gol veya 10'lu skorlar)
         const crazyComments = [
             "Bu skor halı sahada bile çıkmaz! FIFA oynasalar bu kadar gol olmazdı!",
             "Defanslar maça gelmeyi unuttu sanırım, kaleciler istifasını verdi!",
@@ -358,18 +351,16 @@
             if (!isSpinning) {
                 isSpinning = true;
                 spinBtn.innerHTML = '<i class="fa-solid fa-hand"></i> Skoru Durdur!';
-                spinBtn.style.background = 'linear-gradient(45deg, #D50000, #FF1744)';
+                spinBtn.style.background = '#D50000';
                 spinBtn.style.color = '#fff';
 
-                // Bir taraf Sarı, Bir taraf Kırmızı efekt
                 gsBox.classList.add('spin-yellow');
                 barcaBox.classList.add('spin-red');
 
                 commentBox.innerText = '"Kader belirleniyor, skorlar dönüyor..."';
 
                 spinInterval = setInterval(() => {
-                    // 0 ile 10 arasında rastgele skorlar
-                    currentGs = Math.floor(Math.random() * 11); 
+                    currentGs = Math.floor(Math.random() * 11);
                     currentBarca = Math.floor(Math.random() * 11);
                     gsBox.innerText = currentGs;
                     barcaBox.innerText = currentBarca;
@@ -382,7 +373,7 @@
                 barcaBox.classList.remove('spin-red');
 
                 spinBtn.innerHTML = '<i class="fa-solid fa-dice"></i> Yeniden Belirle';
-                spinBtn.style.background = 'linear-gradient(45deg, var(--gs-yellow), #ffa500)';
+                spinBtn.style.background = 'var(--gs-yellow)';
                 spinBtn.style.color = '#000';
 
                 updateComment(currentGs, currentBarca);
@@ -427,8 +418,9 @@
             const card = document.getElementById('captureCard');
             
             html2canvas(card, {
-                backgroundColor: null,
-                scale: 2
+                backgroundColor: '#220208',
+                scale: 3,
+                useCORS: true
             }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = 'GS-BARCA-Tahmin.png';
