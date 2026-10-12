@@ -135,7 +135,6 @@
             transition: all 0.3s ease;
         }
 
-        /* DÖNÜŞ ANINDA SARI VE KIRMIZI YANIP SÖNME */
         .score-display.spin-yellow {
             border-color: var(--gs-yellow) !important;
             color: var(--gs-yellow) !important;
@@ -182,7 +181,7 @@
             font-size: 0.9rem;
             color: #f0f0f0;
             line-height: 1.4;
-            min-height: 45px;
+            min-height: 50px;
             display: flex;
             align-items: center;
         }
@@ -293,7 +292,7 @@
     </div>
 
     <script>
-        // MİZAHİ YORUM LİSTELERİ
+        // GALATASARAY GALİBİYETİ YORUMLARI
         const gsComments = [
             "RAMS Park'ta uzay takımı gelse söker atar! Aslan kükredi bir kere! 🦁",
             "Camp Nou yetkilileri ne olduğunu anlamadan İstanbul uçak biletlerini kontrol ediyor...",
@@ -303,32 +302,46 @@
             "Katalan basını şokta: 'İstanbul'da kaybolduk, pusulamız bozuldu!'",
             "Osimhen gol şov yaptı, Barcelona defansı tatile erken çıktı!",
             "Boğaz'ın kırmızı-sarı suları Barcelona'yı yuttu!",
-            "Avrupa Fatihi genleri devreye girdi, Katalanlar şaşkın!"
+            "Avrupa Fatihi genleri devreye girdi, Katalanlar şaşkın!",
+            "Boğaz kıyısında samba vakti! Barcelona defansı ayakta uyudu.",
+            "Tüm İstanbul sokaklarında davul zurna çalıyor, Katalonya'da matem var!",
+            "Bu maçı izleyen uzaylılar futbolun sarı-kırmızı oynandığına karar verdi!"
         ];
 
+        // BARCELONA GALİBİYETİ YORUMLARI
         const barcaComments = [
             "Tiki-taka İstanbul sahillerine kadar indi, bu skor can yakar...",
             "Barça uzay futbolu oynadı, bizimkiler uzaydan gelen topu izledi.",
-            "Flick maçı izlerken kahvesini yudumladı, tıkır tıkır galibiyet.",
+            "Xavi ve Flick maçı izlerken kahvesini yudumladı, tıkır tıkır galibiyet.",
             "Skor panosu bozulmadıysa Barcelona şov yapmış demektir...",
             "İspanyol rüzgarı sert esti, kalecimizin eldivenleri buharlaştı!",
             "Pas yüzdesi %98 olunca top bize hiç gelmedi desek yeridir...",
-            "Barcelona taktiği çözülemedi, UEFA araya girdi sanırım!"
+            "Barcelona taktiği çözülemedi, UEFA araya girdi sanırım!",
+            "Katalanlar şovunu yaptı, İstanbul'dan 3 puanla döndü.",
+            "Işıklar kapandı, Barcelona geceyi aydınlattı...",
+            "Pas trafiğinden bizim oyuncuların başı döndü, çimlere uzandılar."
         ];
 
+        // BERABERLİK YORUMLARI
         const drawComments = [
             "Dostluk kazandı ama iki tarafın da kalbi duruyordu! Harika bir maç!",
             "Şampiyonlar Ligi kalitesinde bir beraberlik! Kimse üzülmedi.",
             "Tiki-taka ile Bam-Bam-Bam çakıştı, nötr alan oluştu!",
             "İki dev yenişemedi, rövanş maçı sinemalarda!",
             "Ne Aslan pes etti ne de Katalanlar! Sonuç: Kardeşlik berabere.",
-            "90 dakika boyunca iki taraf da ne var ne yok sahaya döktü!"
+            "90 dakika boyunca iki taraf da ne var ne yok sahaya döktü!",
+            "İki taraf da taktiksel olarak birbirini kilitledi, tam bir satranç maçı!",
+            "Maç bitti ama heyecandan kimse tribünü terk edemiyor!"
         ];
 
+        // ÇOK GOLLÜ MAÇ YORUMLARI (+7 Gol veya 10'lu skorlar)
         const crazyComments = [
             "Bu skor halı sahada bile çıkmaz! FIFA oynasalar bu kadar gol olmazdı!",
             "Defanslar maça gelmeyi unuttu sanırım, kaleciler istifasını verdi!",
-            "Tarihe geçecek bir tenis maçı skoru! Seyirciler ayakta alkışlıyor!"
+            "Tarihe geçecek bir tenis maçı skoru! Seyirciler ayakta alkışlıyor!",
+            "Skor tabelasını yapan yazılımcı koda yanlışlıkla döngü eklemiş sanırım!",
+            "Hakem düdük çalmaktan, santra yapmaktan yoruldu!",
+            "Gol izlemekten maçı analiz edecek vakit kalmadı!"
         ];
 
         let isSpinning = false;
@@ -355,8 +368,9 @@
                 commentBox.innerText = '"Kader belirleniyor, skorlar dönüyor..."';
 
                 spinInterval = setInterval(() => {
-                    currentGs = Math.floor(Math.random() * 5); // 0-4 arası
-                    currentBarca = Math.floor(Math.random() * 5);
+                    // 0 ile 10 arasında rastgele skorlar
+                    currentGs = Math.floor(Math.random() * 11); 
+                    currentBarca = Math.floor(Math.random() * 11);
                     gsBox.innerText = currentGs;
                     barcaBox.innerText = currentBarca;
                 }, 70);
@@ -379,7 +393,7 @@
             const commentBox = document.getElementById('commentText');
             let comment = "";
 
-            if (gs + barca >= 7) {
+            if (gs + barca >= 7 || gs === 10 || barca === 10) {
                 comment = crazyComments[Math.floor(Math.random() * crazyComments.length)];
             } else if (gs > barca) {
                 comment = gsComments[Math.floor(Math.random() * gsComments.length)];
